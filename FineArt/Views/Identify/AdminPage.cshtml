@@ -1,0 +1,54 @@
+﻿@model FineArt.Models.AdminManager;
+
+@{
+	Layout = "_SignupLayout";
+    ViewData["Title"] = "Profile Setting";
+}
+<div class="loading loading-hidden"></div>
+<div class="row no-gutters">
+    <div class="col-xl-12">
+        <div class="auth-form">
+            <h4 class="display-4 text-center">@ViewData["Title"]</h4>
+            <div class="basic-form">
+                <form id="AdminProfileSetting" method="post" enctype="multipart/form-data">
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input asp-for="AvatarFile" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                            <div id="imagePreview" style="background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png');">
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label asp-for="Age"></label>
+                            <input asp-for="Age" class="form-control">
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <label asp-for="Gender"></label>
+                            <select class="single-select-placeholder js-states" asp-for="Gender">
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <label asp-for="Phone"></label>
+                            <input asp-for="Phone" class="form-control" placeholder="911-888-0000">
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <label asp-for="Extras"></label>
+                            <input asp-for="Extras" class="form-control" placeholder="Link Ex. www.extra.com">
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                    </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

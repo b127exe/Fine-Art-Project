@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Card Column Start */
+
+.card-columns .card {
+    margin-bottom: 0.75rem;
+}
+
+.card-img {
+    width: 100%;
+    border-radius: calc(0.25rem - 1px);
+}
+
+.card-pin:hover .overlay {
+    opacity: .5;
+    border: 5px solid #f3f3f3;
+    -webkit-transition: ease .2s;
+    transition: ease .2s;
+    background-color: #000000;
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+}
+
+.card-pin:hover .card-title {
+    color: #ffffff;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.card-pin:hover .more a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.card-pin:hover .download a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+    background-color: #008CBA;
+}
+
+.card-title {
+    margin-bottom: 0.75rem;
+}
+
+.more {
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-transform: uppercase;
+    -webkit-transform: translate(-20%, -20%);
+            transform: translate(-20%, -20%);
+    -ms-transform: translate(-50%, -50%); }
+
+@media (min-width: 576px) {
+
+    .card-columns {
+        -webkit-column-count: 5;
+        column-count: 5;
+        -webkit-column-gap: 1.25rem;
+        column-gap: 1.25rem;
+        orphans: 1;
+        widows: 1;
+    }
+
+    .card-columns .card {
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+/* Card Column End */
+
+.navbar ul {
+    padding-left: 450px;
+}
+
+.navbar ul li {
+    font-weight: 400;
+    font-size: larger;
+}
+
+@media only screen and (max-width:800px) {
+    .navbar ul {
+        padding-left: 20px;
+    }
+
+    .footer2 ul li {
+        margin-left: 20px;
+    }
+}
+
+
+
+
+.hsection1 {
+    text-align: center;
+    background-image: url('../../../images/home-banner.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
+.hsection1 h1 {
+    padding-top: 100px;
+    color: #4D4D4D;
+}
+
+.hsection1 h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #7E0000;
+}
+
+.hsection1 h5 {
+    color: #FFFFF4;
+}
+
+.hsection1 h6 {
+    color: black;
+}
+
+.hbtn {
+    background-color: #FFB100;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    letter-spacing: 4px;
+    margin-top: 20px;
+}
+
+.hsection2 {
+    text-align: center;
+}
+
+.hr {
+    border: 2px solid yellow;
+    width: 100%;
+}
+
+.hsection3 {
+    margin-top: 100px;
+    padding-top: 100px;
+    background-color: #F7F9FB;
+}
+
+.hsection3 h2 {
+    font-size: 3rem;
+}
+
+.hsection3 h6 {
+    color: grey;
+}
+
+.question {
+    margin-top: 50px;
+}
+
+.answer {
+    margin-top: 20px;
+}
+
+.hsection5 h6 {
+    line-height: 30px;
+    color: grey;
+}
+
+.hsection5 p {
+    text-align: center;
+    font-weight: bold;
+    color: #05602F;
+    text-decoration: underline #05602F;
+}
+
+.footer {
+    height: 580px;
+    background-image: url(./images/6221846.jpg);
+    background-size: cover;
+    text-align: center;
+    align-items: center;
+}
+
+i {
+    color: #FFAA00;
+}
+
+.footer .container {
+    padding-top: 150px;
+}
+
+.footer h2 {
+    color: #FFB100;
+}
+
+.footer2 .container {
+    height: 130px;
+}
+
+.footer2 ul li {
+    float: left;
+    text-decoration: none;
+    list-style: none;
+}
+
+.fli1 {
+    margin-left: 50px;
+}
+
+.fli2 {
+    margin-left: 600px;
+}
+
+.last {
+    background-color: #FFAA00;
+    text-align: center;
+    height: 100px;
+    padding-top: 50px;
+}
+
+.asection1 {
+    background-image: url(./images/about.jpg);
+    background-size: cover;
+    height: 600px;
+}
+
+.asection1 h1 {
+    font-size: 4rem;
+    margin-top: 100px;
+    text-align: center;
+    color: #F7F9FB;
+}
+
+.asection2 h2 span {
+    font-size: 3rem;
+    margin-right: 20px;
+}
+
+.asection2 h3 {
+    margin-top: 200px;
+}
+
+.tsection2 .tlast {
+    margin-top: 150px;
+}
+
+.csection2 {
+    height: 50vh;
+}
+
+.csection2 h1 {
+    margin-top: 100px;
+}
+
+.csection2 h5 {
+    margin-top: 50px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+
+}
+
+.csection2 p {
+    font-size: 2rem;
+    color: #FFB14A;
+    text-align: center;
+}

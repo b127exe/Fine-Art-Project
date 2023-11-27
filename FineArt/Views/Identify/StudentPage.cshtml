@@ -1,0 +1,71 @@
+﻿@model FineArt.Models.Student;
+
+@{
+    Layout = "_SignupLayout";
+    ViewData["Title"] = "Profile Setting";
+}
+<div class="loading loading-hidden"></div>
+<div class="row no-gutters">
+    <div class="col-xl-12">
+        <div class="auth-form">
+            <h4 class="display-4 text-center">@ViewData["Title"]</h4>
+            <div class="basic-form">
+                <form id="StudentProfileSetting" method="post" enctype="multipart/form-data">
+                    <div class="avatar-upload">
+                        <div class="avatar-edit">
+                            <input asp-for="AvatarFile" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                            <label for="imageUpload"></label>
+                        </div>
+                        <div class="avatar-preview">
+                            <div id="imagePreview" style="background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png');">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-material">
+                        <div class="col-sm-6">
+                            <label asp-for="DateOfBirth"></label>
+                            <input asp-for="DateOfBirth" id="mdate" class="form-control" placeholder="yyyy-mm-dd">
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <label asp-for="Gender"></label>
+                            <select class="single-select-placeholder js-states" asp-for="Gender">
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <label asp-for="ArtType"></label>
+                            <select class="single-select-placeholder js-states" asp-for="ArtType">
+                                <option value="pop art" selected>Pop Art</option>
+                                <option value="conceptual art">Conceptual Art</option>
+                                <option value="contemporary art">Contemporary Art</option>
+                                <option value="painting">Painting</option>
+                                <option value="cubism">Cubism</option>
+                                <option value="visual art">Visual Art</option>
+                                <option value="sculpture">Sculpture</option>
+                                <option value="impressionism">Impressionism</option>
+                                <option value="fine art">Fine Art</option>
+                                <option value="surrealism">Surrealism</option>
+                                <option value="land art">Land Art</option>
+                                <option value="art nouveau">Art Nouveau</option>
+                                <option value="fauvism">Fauvism</option>
+                                <option value="abstract art">Abstract Art</option>
+                                <option value="installation art">Installation Art</option>
+                                <option value="action painting">Action Painting</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <label asp-for="Standard"></label>
+                            <input asp-for="Standard" class="form-control" placeholder="Your Standard/Class name" />
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

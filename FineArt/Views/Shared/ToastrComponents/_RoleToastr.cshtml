@@ -1,0 +1,54 @@
+﻿
+<script src="~/lib/i_admin/vendor/jquery/jquery.min.js"></script>
+<script src="~/lib/i_admin/vendor/toastr/js/toastr.min.js"></script>
+
+@if (TempData["RoleStatus"] as string == "Edit")
+{
+	<script>
+		$(document).ready(function(){
+            toastr.success("The Role is edit successfully", "Edited", {
+                positionClass: "toast-bottom-right",
+                timeOut: 5e3,
+                closeButton: !0,
+                debug: !1,
+                newestOnTop: !0,
+                progressBar: !0,
+                preventDuplicates: !0,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                tapToDismiss: !1
+            })
+		});
+	</script>
+}
+@if (TempData["RoleStatus"] as string == "Add")
+{
+    <script>
+        $(document).ready(function () {
+            toastr.success("The Role is added successfully", "Added", {
+                positionClass: "toast-bottom-right",
+                timeOut: 5e3,
+                closeButton: !0,
+                debug: !1,
+                newestOnTop: !0,
+                progressBar: !0,
+                preventDuplicates: !0,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                tapToDismiss: !1
+            })
+        });
+    </script>
+}

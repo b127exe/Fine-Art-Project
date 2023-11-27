@@ -1,0 +1,52 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="row no-gutters">
+    <div class="col-xl-12">
+        <div class="auth-form">
+           <h4 class="text-center mb-4">Sign In</h4>
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <strong><label asp-for="Input.Email" class="form-label"></label></strong>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong><label asp-for="Input.Password" class="form-label"></label></strong>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                    <div class="form-group">
+                        <div class="form-check ml-2 checkbox">
+                            <input class="form-check-input" asp-for="Input.RememberMe" id="basic_checkbox_1" />
+                            <label class="form-check-label" for="basic_checkbox_1">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register an new account</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

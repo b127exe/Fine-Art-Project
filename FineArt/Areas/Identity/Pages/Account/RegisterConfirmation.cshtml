@@ -1,0 +1,28 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<div class="row no-gutters">
+    <div class="col-xl-12">
+        <div class="auth-form">
+            <h4 class="text-center mb-4">@ViewData["Title"]</h4><hr />
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+            <p class="text-center">
+                        <strong> Please click the below button to confirm the email </strong>
+            </p>
+                    <a id="confirm-link" style="padding: 12px 0;" class="btn btn-primary btn-block text-center" href="@Model.EmailConfirmationUrl">Confirm Email</a>
+    }
+    else
+    {
+            <p>
+                    Please check your email to confirm your account.
+            </p>
+    }
+}
+        </div>
+    </div>
+</div>
