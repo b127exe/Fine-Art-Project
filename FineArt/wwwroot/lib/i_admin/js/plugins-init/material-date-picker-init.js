@@ -6,6 +6,14 @@
         weekStart: 0,
         time: false
     });
+    $('#startDate').bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false
+    });
+    $('#endDate').bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false
+    });
     $('#timepicker').bootstrapMaterialDatePicker({
         format: 'HH:mm',
         time: true,

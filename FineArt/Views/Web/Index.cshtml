@@ -1,4 +1,92 @@
-﻿@{
+﻿@model FineArt.Models.FineArtViewModel
+@{
 	Layout = "_WebLayout";
 }
-<h3>FineArt Website Home...</h3>
+<div class="loading loading-hidden"></div>
+<div class="modal fade" id="AddPostingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Post Your Art Design</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                    
+            <div class="modal-body">
+                <form id="AddPostingForm" class="g-3 needs-validation" enctype="multipart/form-data" novalidate method="post">
+                    <div class="form-group my-3">
+                        <label asp-for="inputPosting.Title" class="form-label"></label>
+                        <input type="text" class="form-control" asp-for="inputPosting.Title" placeholder="Ex. Crystal Art" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>  
+                    <div class="form-group my-3">
+                        <label asp-for="inputPosting.Description" class="form-label"></label>
+                        <input type="text" class="form-control" asp-for="inputPosting.Description" placeholder="Description Here..." required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group my-3">                        
+                        <label asp-for="inputPosting.Quotation" class="form-label"></label>
+                        <input type="text" class="form-control" asp-for="inputPosting.Quotation" placeholder="Quotation Here..." required>
+                        <div class="valid-feedback">        
+                            Looks good!                               
+                        </div>
+                    </div>
+
+                    <div class="form-group my-3">
+                        <div class="upload__box">
+                            <div class="upload__btn-box">
+                                <label class="upload__btn" asp-for="inputPosting.DesignImageFile">
+                                    <span>🎴  Design Upload</span>
+                                    <input type="file" asp-for="inputPosting.DesignImageFile" data-max_length="20" class="upload__inputfile">
+                                </label>
+                            </div>
+                            <div class="upload__img-wrap"></div>
+                        </div> 
+                    </div>
+                    
+                    <div class="d-grid my-3">
+                        <input type="submit" class="btn btn-warning" value="Post Design" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h3 class="text-center">Upcoming Competitions</h3>
+              <ul class="cards">
+            @foreach(var upcomingCompetition in Model.myCompetitions)
+            {          
+              <li>
+                <a href="" class="card">
+		            <img src="~/images/competition.png" class="card__image" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__header">
+                      <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                      <div class="card__header-text">
+                        <h3 class="card__title">@Html.DisplayFor(model => upcomingCompetition.CompetitionTitle)</h3>
+                        <span class="badge bg-warning">Upcoming</span>
+                      </div>
+                    </div>
+                    <p class="card__description">
+                            <i class='bx bxs-timer'></i>
+                            @{
+                                string dateString = upcomingCompetition.StartDate;
+                                DateTime parsedDate;
+
+                                if (DateTime.TryParse(dateString, out parsedDate))
+                                {
+                                    string formattedDate = parsedDate.ToString("d MMMM, yyyy");
+                                    @formattedDate
+                                }
+                            }
+                    </p>
+                  </div>
+                </a>      
+              </li>
+            }
+  </ul>
+</div>

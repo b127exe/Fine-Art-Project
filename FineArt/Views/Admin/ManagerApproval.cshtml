@@ -3,7 +3,7 @@
     ViewData["Title"] = "Manager Approval";
     Layout = "_AdminLayout";
 }
-
+<div class="loading loading-hidden"></div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -44,9 +44,9 @@
                                         Manager
                                     </td>
                                     <td>
-                                        <div class="sweetalert mt-4">
-                                            <button class="btn btn-info btn sweet-ajax">Sweet Ajax</button>
-                                        </div>
+                                        <div class="sweetalert">
+                                            <button class="btn btn-light btn manager-approval" data-id="@item.UserId"><i class="fa fa-pencil color-muted"></i></button>
+                                        </div>                         
                                     </td>
                                 </tr>
                             }

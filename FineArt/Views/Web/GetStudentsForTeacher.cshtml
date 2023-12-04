@@ -1,0 +1,120 @@
+﻿@model IEnumerable<FineArt.Models.Student>
+@{
+    Layout = "_Web2Layout";
+    ViewData["Title"] = "Students";
+}
+
+<style>
+    .banner-image {
+		background-size: cover;
+		background-image: url('../images/students-banner-1.jpg');
+    }
+
+    .thirteen h1 {
+        position: relative;
+        font-size: 80px;
+        font-weight: 700;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+        width: 447px;
+        text-align: center;
+        margin: 20px auto;
+        white-space: nowrap;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 5px 11px 3px 11px;
+    }
+
+        .thirteen h1:before, .thirteen h1:after {
+            background-color: #E7C699;
+            position: absolute;
+            content: '';
+            height: 13px;
+            width: 13px;
+            border-radius: 50%;
+            bottom: 45px;
+        }
+
+        .thirteen h1:before {
+            left: -20px;
+        }
+
+        .thirteen h1:after {
+            right: -20px;
+        }
+        h1:before,
+        h1:after {
+            background-color: #c50000;
+        }
+</style>
+
+<!-- Banner Image  -->
+<div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
+    <div class="content text-center">
+        <div class="thirteen">
+        <h1>Students</h1>
+        </div>
+        <p class="text-white" style="font-size: 20px;">In an educational setting, a teacher with data access privileges plays a pivotal role in monitoring and guiding students' academic progress.</p>
+    </div>
+</div>
+
+<div class="container">
+    <h3>All Students</h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Standard</th>
+                    <th scope="col">Art Type</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                <tr>
+                <td>@Html.DisplayFor(modelItem => item.StudentId)</td>
+                <td>
+                @{
+                if (item.User != null)
+                {
+                string firstName = item.User is ApplicationUser ? ((ApplicationUser)item.User).First_name : "N/A";
+                @firstName
+                }
+                else
+                {
+                <text>N/A</text>
+                }
+                }
+                </td>
+                <td>
+                @{
+                if (item.User != null)
+                {
+                string lastName = item.User is ApplicationUser ? ((ApplicationUser)item.User).Last_name : "N/A";
+                @lastName
+                }
+                else
+                {
+                <text>N/A</text>
+                }
+                }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => item.Standard)</td>
+                <td>@Html.DisplayFor(modelItem => item.ArtType)</td>
+                <td>
+                            <a asp-controller="Web" asp-action="GetStudentsForTeacherById" asp-route-id="@item.StudentId">
+                          <i class='bx bx-right-top-arrow-circle' style="font-size: 32px;"></i>
+                    </a>
+                </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

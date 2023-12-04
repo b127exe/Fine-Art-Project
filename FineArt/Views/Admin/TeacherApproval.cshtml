@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FineArt.Models.Teacher>
+@{
+    ViewData["Title"] = "Teacher Approval";
+    Layout = "_AdminLayout";
+}
+<div class="loading loading-hidden"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Teacher Approval</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+
+                    <table class="table table-responsive-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-muted">
+                                        @Html.DisplayFor(modelItem => item.TeacherId)
+                                    </td>
+                                    <td class="text-muted">
+                                        @Html.DisplayFor(modelItem => item.User.Email)
+                                    </td>
+                                    <td class="text-muted">
+                                        @if (item.ApprovedStatus == 0)
+                                        {
+                                            <span class="badge badge-warning">Approval Pending</span>
+                                        }
+                                    </td>
+                                    <td class="text-muted">
+                                        Teacher
+                                    </td>
+                                    <td>
+                                        <div class="sweetalert">
+                                            <button class="btn btn-light btn approved-teacher" data-id="@item.UserId"><i class="fa fa-pencil color-muted"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

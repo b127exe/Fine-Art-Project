@@ -1,0 +1,186 @@
+﻿@model FineArt.Models.Student
+@{
+    Layout = "_Web2Layout";
+    ViewData["Title"] = "Students";
+}
+<style>
+    .card {
+        width: 500px;
+        background-color: #efefef;
+        border: none;
+        /*cursor: pointer;*/
+        transition: all 0.5s;
+    }
+
+    .image img {
+        object-fit: cover;
+        width: 10rem;
+        height: 10rem;
+        transition: all 0.5s;
+    }
+
+    .card:hover .image img {
+        transform: scale(1.2)
+    }
+
+    .btn {
+        height: 140px;
+        width: 140px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .name {
+        font-size: 22px;
+        font-weight: bold
+    }
+
+    .idd {
+        font-size: 14px;
+        font-weight: 600
+    }
+
+    .idd1 {
+        font-size: 12px
+    }
+
+    .number {
+        font-size: 22px;
+        font-weight: bold
+    }
+
+    .follow {
+        font-size: 12px;
+        font-weight: 500;
+        color: #444444
+    }
+
+    .btn1 {
+        height: 40px;
+        width: 150px;
+        border: none;
+        background-color: #000;
+        color: #aeaeae;
+        font-size: 15px
+    }
+
+    .text span {
+        font-size: 13px;
+        color: #545454;
+        font-weight: 500
+    }
+
+    .icons i {
+        font-size: 37px;
+        color: #555;
+        transition: all .5s;
+        cursor: pointer;
+    }
+
+    .icons i:hover{
+        color: #FFAA00;
+    }
+
+    hr .new1 {
+        border: 1px solid
+    }
+
+    .join {
+        font-size: 14px;
+        color: #a0a0a0;
+        font-weight: bold
+    }
+
+    .date {
+        background-color: #ccc
+    }
+
+    .back-btn{
+        width: 45px;
+        height: 45px;
+        font-size: 32px;
+        background: #EFEFEF;
+        padding: 5px;
+        border-radius: 50%;
+    }
+</style>
+<div class="container">
+    <div>
+        <a asp-controller="Web" asp-action="GetStudentsForTeacher" class="back-btn btn">
+            <i class='bx bx-left-arrow-alt' style="color: #555;"></i>
+        </a>
+    </div>
+</div>
+<div class="container mt-2 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4">
+        <div class="image d-flex flex-column justify-content-center align-items-center">
+            <button class="btn btn-secondary"> <img src="~/avatar-uploads/@Model.AvatarUrl" height="100" width="100" /></button>
+            <span class="name mt-3">
+                @if(Model.User != null)
+                {
+                    string firstName = Model.User is ApplicationUser ? ((ApplicationUser)Model.User).First_name : "N/A";
+                    string lastName = Model.User is ApplicationUser ? ((ApplicationUser)Model.User).Last_name : "N/A";
+                    string fullName = firstName + " " + lastName;
+                    @fullName
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+            </span> <span class="idd">STD-@Model.StudentId</span>
+            <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                <span class="number">
+                    @{
+                        string dateString = Model.DateOfBirth;
+                        DateTime parsedDate;
+
+                        if (DateTime.TryParse(dateString, out parsedDate))
+                        {
+                            string formattedDate = parsedDate.ToString("d MMMM, yyyy");
+                            @formattedDate
+                        }
+                    }
+                    <span class="follow">Date Of Birth</span></span>
+            </div>
+            <div class="w-100 d-flex mt-2"> 
+                <ul class="w-100 list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="background: transparent;">
+                        <p>Gender</p>
+                        <span>@Model.Gender</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="background: transparent;">
+                        <p>Art Type</p>
+                        <span>@Model.ArtType</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="background: transparent;">
+                        <p>Standard</p>
+                        <span>@Model.Standard</span>
+                    </li>
+                </ul>    
+            </div>
+            <div class="text text-center mt-3">
+                <span>
+                    @if (Model.User != null)
+                    {
+                        string firstName = Model.User is ApplicationUser ? ((ApplicationUser)Model.User).First_name : "N/A";
+                        string lastName = Model.User is ApplicationUser ? ((ApplicationUser)Model.User).Last_name : "N/A";
+                        string fullName = firstName + " " + lastName;
+                        @fullName
+                    }
+                    else
+                    {
+                        <text>N/A</text>
+                    }
+                    is a art creator of FineArt network.<br> World's Most Trustworthy And Fair International Art Contest.
+                </span>
+            </div>
+            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                <span><i class='bx bxl-twitter'></i></span> <span><i class='bx bxl-facebook-circle'></i></span>
+                <span><i class='bx bxl-instagram-alt'></i></span> <span><i class='bx bxl-linkedin-square'></i></span>
+            </div>
+        </div>
+    </div>
+</div>

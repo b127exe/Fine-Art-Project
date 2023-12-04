@@ -1,10 +1,82 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    //Layout = "_AdminLayout";
-    Layout = "_SignupLayout";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FineArt</title>
+	<link href="~/css/fileartlanding.css" rel="stylesheet" />
+</head>
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+	<nav>
+		<div class="logo">
+			<a href="#!">F</a>
+		</div>
+		<ul id="nav" class="menu">
+			<li class="toggle">
+				<a href="#!">Menu</a>
+				<ul class="dropdown-nav">
+					<li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+					<li><a asp-area="Identity" asp-page="/Account/Register">Sign Up</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="img1"></div>
+
+	<div class="block1">
+		<div class="content">
+			<h1>FineArt Media <br> Design </h1>
+			<span>Presents</span>
+			<p>World's Most Trustworthy And Fair International Art Contest.</p>
+		</div>
+	</div>
+
+	<div class="block2">
+		<div class="content">
+			<h2>Best in show</h2>
+			<p>Aesthesic Design<br> & Light Fair</p>
+		</div>
+		<div class="plus">+</div>
+	</div>
+
+	<div class="img2"></div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script>
+		var h;
+		$(document).ready(function () {
+			// get nav height
+			h = $('.dropdown-nav').height();
+			h = h + 'px';
+			console.log(h);
+			$('.dropdown-nav').css('height', '0');
+		});
+
+		$('#nav').click(function () {
+			if ($(this).hasClass('show')) {
+				$('.dropdown-nav').css('height', '0');
+				$(this).removeClass('show');
+			} else {
+				$('.dropdown-nav').css('height', h);
+				$(this).addClass('show');
+			}
+		});
+
+		window.sr = ScrollReveal({
+			reset: false,
+			origin: 'right',
+			distance: '80px',
+			duration: 800,
+			delay: 10,
+			easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)'
+		});
+		sr.reveal('.block1', { distance: '0px' });
+		sr.reveal('.block2', { delay: 200, origin: 'right' });
+		sr.reveal('.img1', { delay: 100, origin: 'left' });
+		sr.reveal('.img2', { delay: 400, origin: 'top' });
+	</script>
+</body>
+</html>

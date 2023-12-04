@@ -1,0 +1,245 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500");
+
+* {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    background: #E7E7E7;
+    display: grid;
+    grid: "nav nav nav nav" "img1 img1 img1 block1" "block2 block2 block2 block2" "img2 img2 img2 img2" / 60px 1fr 100px 1fr;
+    grid-template-rows: [g-top] 60px [nav-e g-b1s] auto [g-b1e g-b2s] auto [g-b2e g-img2] 20vh [g-bot];
+    overflow-x: hidden;
+}
+
+@media only screen and (min-width: 1425px) {
+    body {
+        grid: "nav nav nav nav nav nav nav" "img1 img1 img1 img1 block1 img2 img2" "img1 img1 img1 img1 block2 block2 block2" / 60px 1fr 1fr 100px 1fr 1fr 100px;
+        grid-template-rows: [g-top] 60px [nav-e g-b1s] 1fr [g-b1e g-b2s] auto [g-b2e g-bot];
+    }
+}
+
+a {
+    position: relative;
+    color: #ef3340;
+    text-decoration: none;
+}
+
+    a:after {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height: 1px;
+        background-color: #de1120;
+        transition: width 0.175s ease-in;
+    }
+
+    a:hover:after {
+        width: 100%;
+    }
+
+nav {
+    grid-area: nav;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 60px 1fr;
+    grid-template-areas: "logo menu";
+    z-index: 1;
+    border-bottom: 1px solid rgba(218, 218, 218, 0.4);
+}
+
+    nav .logo {
+        grid-area: logo;
+        border-right: 1px solid rgba(218, 218, 218, 0.4);
+        font-size: 2rem;
+    }
+
+        nav .logo a {
+            display: block;
+            line-height: 60px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+            nav .logo a:after {
+                display: none;
+            }
+
+            nav .logo a:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+    nav .menu {
+        grid-area: menu;
+        text-transform: uppercase;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        nav .menu li {
+            position: relative;
+        }
+
+            nav .menu li a {
+                line-height: 60px;
+                padding: 0 2rem;
+                color: rgba(0, 0, 0, 0.87);
+                display: block;
+                transition: all 200ms cubic-bezier(0.25, 0.75, 0.5, 1);
+            }
+
+                nav .menu li a:after {
+                    background-color: #9b9b9b;
+                }
+
+                nav .menu li a:hover {
+                    padding-left: 2.5rem;
+                }
+
+            nav .menu li ul {
+                position: absolute;
+                left: 0;
+                list-style: none;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                transition: all 200ms cubic-bezier(0.25, 0.75, 0.5, 1);
+            }
+
+                nav .menu li ul li {
+                    background: #dadada;
+                    line-height: 60px;
+                }
+
+                    nav .menu li ul li:not(:last-child) {
+                        border-bottom: 1px solid #cecece;
+                    }
+
+                    nav .menu li ul li:hover a {
+                        background: rgba(0, 0, 0, 0.1);
+                    }
+
+                    nav .menu li ul li a {
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+
+@media only screen and (min-width: 1425px) {
+    nav {
+        grid-template-columns: 60px 1fr 1fr 100px 1fr 1fr 100px;
+        grid-template-areas: "logo . . . menu . .";
+    }
+}
+
+h1 {
+    font-weight: 400;
+}
+
+.block1 {
+    background: #E7E7E7;
+    grid-area: block1;
+    display: flex;
+}
+
+    .block1 .content {
+        padding: 2rem 3rem 2rem 2rem;
+        align-self: flex-end;
+    }
+
+        .block1 .content h1 {
+            font-size: 2.2rem;
+        }
+
+        .block1 .content span {
+            letter-spacing: 1rem;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 1.2em;
+            display: block;
+        }
+
+        .block1 .content p {
+            font-size: .8rem;
+            margin-top: 0;
+            line-height: 1.68em;
+            letter-spacing: .1rem;
+            margin-bottom: 0;
+        }
+
+.block2 {
+    background: #82827c;
+    grid-area: block2;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 100px;
+    grid-template-areas: "content . plus";
+    color: #fff;
+}
+
+    .block2 .content {
+        padding: 2rem;
+        grid-area: content;
+        border-right: 1px solid #cecece;
+    }
+
+        .block2 .content h2 {
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 6rem;
+        }
+
+        .block2 .content p {
+            line-height: 1.68em;
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+    .block2 .plus {
+        padding: 2rem;
+        grid-area: plus;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 200;
+        border-left: 1px solid #cecece;
+    }
+
+.img1 {
+    grid-area: img1;
+    background: url("https://images.unsplash.com/photo-1613746203812-717e6e5db3da?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    grid-row: g-top / g-b1e;
+}
+
+.img2 {
+    grid-area: img2;
+    background: url("https://images.unsplash.com/photo-1574182245530-967d9b3831af?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 1425px) {
+    .img1 {
+        grid-row: g-top / g-bot;
+    }
+
+    .img2 {
+        grid-row: g-top / g-b1e;
+    }
+}

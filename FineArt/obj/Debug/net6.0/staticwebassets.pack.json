@@ -5,12 +5,36 @@
       "PackagePath": "staticwebassets\\FineArt.bundle.scp.css"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\8ca8b2e3-a944-4b45-b857-47d5b0403647_talha-anjum.png",
+      "PackagePath": "staticwebassets\\avatar-uploads\\8ca8b2e3-a944-4b45-b857-47d5b0403647_talha-anjum.png"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\8e7da3e8-467c-4045-8563-5404724e9439_14.png",
       "PackagePath": "staticwebassets\\avatar-uploads\\8e7da3e8-467c-4045-8563-5404724e9439_14.png"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\ba7d359b-028d-4d04-9b6c-1b8295785f73_the-weekend.png",
+      "PackagePath": "staticwebassets\\avatar-uploads\\ba7d359b-028d-4d04-9b6c-1b8295785f73_the-weekend.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\dd2efaf8-a5bb-41dc-b46e-4152fd1e1c9a_Clip Mask Image-1.png",
+      "PackagePath": "staticwebassets\\avatar-uploads\\dd2efaf8-a5bb-41dc-b46e-4152fd1e1c9a_Clip Mask Image-1.png"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\e1805c89-c52a-4fda-bfeb-c82514bf03bf_11.png",
       "PackagePath": "staticwebassets\\avatar-uploads\\e1805c89-c52a-4fda-bfeb-c82514bf03bf_11.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\css\\FileArtLanding.css",
+      "PackagePath": "staticwebassets\\css\\FileArtLanding.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\css\\custom_card.css",
+      "PackagePath": "staticwebassets\\css\\custom_card.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\css\\i_web.css",
+      "PackagePath": "staticwebassets\\css\\i_web.css"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\css\\site.css",
@@ -21,8 +45,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\competition.png",
+      "PackagePath": "staticwebassets\\images\\competition.png"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-banner.jpg",
       "PackagePath": "staticwebassets\\images\\home-banner.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\students-banner-1.jpg",
+      "PackagePath": "staticwebassets\\images\\students-banner-1.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\students-banner.jpg",
+      "PackagePath": "staticwebassets\\images\\students-banner.jpg"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\user-icon.png",
@@ -31,6 +67,10 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\js\\i_admin.js",
       "PackagePath": "staticwebassets\\js\\i_admin.js"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\js\\i_web.js",
+      "PackagePath": "staticwebassets\\js\\i_web.js"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\js\\site.js",
@@ -243,6 +283,14 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\i_admin\\icons\\themify-icons\\fonts\\themifyd41d.eot",
       "PackagePath": "staticwebassets\\lib\\i_admin\\icons\\themify-icons\\fonts\\themifyd41d.eot"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\i_admin\\images\\logo-dark.png",
+      "PackagePath": "staticwebassets\\lib\\i_admin\\images\\logo-dark.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\i_admin\\images\\logo.png",
+      "PackagePath": "staticwebassets\\lib\\i_admin\\images\\logo.png"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\i_admin\\js\\custom.min.js",
@@ -15631,6 +15679,22 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\i_web\\jquery\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\i_web\\jquery\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\2f612730-6af9-4cd1-8641-cc3ed02f3c60_5.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\2f612730-6af9-4cd1-8641-cc3ed02f3c60_5.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\4317c487-d4ba-4ecf-8001-4ace13046050_3.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\4317c487-d4ba-4ecf-8001-4ace13046050_3.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\bb60a407-0369-419c-8f2a-863099a4baf9_1.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\bb60a407-0369-419c-8f2a-863099a4baf9_1.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\c134cb22-c297-4e4a-8f29-ea283b9c8e74_2.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\c134cb22-c297-4e4a-8f29-ea283b9c8e74_2.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.FineArt.Microsoft.AspNetCore.StaticWebAssets.props",

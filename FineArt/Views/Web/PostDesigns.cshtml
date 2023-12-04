@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FineArt.Models.Posting>
+@{
+    Layout = "_Web2Layout";
+    ViewData["Title"] = "Art Designs";
+}
+<style>
+    .banner-image {
+        background-size: cover;
+        background-image: url('../images/students-banner-1.jpg');
+    }
+
+    .thirteen h1 {
+        position: relative;
+        font-size: 80px;
+        font-weight: 700;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+        width: 543px;
+        text-align: center;
+        margin: 20px auto;
+        white-space: nowrap;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 5px 11px 3px 11px;
+    }
+
+        .thirteen h1:before, .thirteen h1:after {
+            background-color: #E7C699;
+            position: absolute;
+            content: '';
+            height: 13px;
+            width: 13px;
+            border-radius: 50%;
+            bottom: 45px;
+        }
+
+        .thirteen h1:before {
+            left: -20px;
+        }
+
+        .thirteen h1:after {
+            right: -20px;
+        }
+
+    h1:before,
+    h1:after {
+        background-color: #c50000;
+    }
+</style>
+
+<!-- Banner Image  -->
+<div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
+    <div class="content text-center">
+        <div class="thirteen">
+            <h1>Art Designs</h1>
+        </div>
+        <p class="text-white" style="font-size: 20px;">This section contains all types of art designs mosaic that was post by institute students</p>
+    </div>
+</div>
+
+<div class="container my-3">
+    <div class="row">
+        <div class="card-columns">
+            @foreach(var design in Model)
+            {
+                <div class="card card-pin">
+                    <img class="card-img" src="~/posting-uploads/@design.DesignImageUrl" alt="Card image">
+                    <div class="overlay">
+                        <h2 class="card-title title">
+                            @{
+                                //if(design.Student.User != null)
+                                //{   
+                                //string firstName = design.Student.User is ApplicationUser ? ((ApplicationUser)design.Student.User).First_name : "N/A";
+                                //string lastName = design.Student.User is ApplicationUser ? ((ApplicationUser)design.Student.User).Last_name : "N/A";
+                                //string fullname = firstName + " " + lastName;
+                                //    @fullname
+                                //} else
+                                //{
+                                //    <text>N/A</text>
+                                //}
+                                //var std = design.Student.User;
+                                //var res = std.UserName;
+                                //@res          
+                            }
+                        </h2>
+                        <div class="more">
+                            <a href="post.html">
+                                @*<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More*@
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

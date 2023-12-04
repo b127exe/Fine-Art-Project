@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.DependencyResolver;
 
 namespace FineArt.Controllers
 {
@@ -225,18 +226,62 @@ namespace FineArt.Controllers
 				var userRole = await _userManager.GetRolesAsync(user);
 				if(userRole != null && userRole.Contains("Admin"))
 				{
-					return RedirectToAction("Index","Admin");
+					var ad = _context.AdminManager.FirstOrDefault(a => a.UserId == userID);
+					if(ad == null)
+					{
+						return RedirectToAction("AdminPage","Identify");
+					}
+					else
+					{
+						return RedirectToAction("Index","Admin");
+					}
 				}
 				else if (userRole != null && userRole.Contains("Manager"))
 				{
+					var man = _context.AdminManager.FirstOrDefault(m => m.UserId == userID);
+                    if (man != null)
+                    {
+                        if (man.ApprovedStatus == 0)
+                        {
+                            return View("ManagerPagePendingApproval");
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(man.Gender) || string.IsNullOrEmpty(man.Phone))
+                            {
+                                return RedirectToAction("ManagerPage", "Identify");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Admin");
+                            }
+                        }
+                    }
                     return RedirectToAction("Index", "Admin");
                 }
                 else if (userRole != null && userRole.Contains("Teacher"))
                 {
+					var tea = _context.Teachers.FirstOrDefault(t => t.UserId == userID);
+                    if (tea != null && string.IsNullOrEmpty(tea.Phone) && string.IsNullOrEmpty(tea.Gender))
+                    {
+                        if (tea.ApprovedStatus == 0)
+                        {
+                            return View("TeacherPagePendingApproval");
+                        }
+                        else
+                        {
+                            return RedirectToAction("TeacherPage", "Identify");
+                        }
+                    }
                     return RedirectToAction("Index", "Web");
                 }
                 else if (userRole != null && userRole.Contains("Student"))
                 {
+					var std = _context.Students.FirstOrDefault(s => s.UserId == userID);
+					if(std == null)
+					{
+						return RedirectToAction("StudentPage", "Identify");
+					} 
                     return RedirectToAction("Index", "Web");
                 }
                 else

@@ -27,6 +27,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\avatar-uploads\" />
     <Folder Include="wwwroot\lib\i_web\" />
+    <Folder Include="wwwroot\posting-uploads\" />
   </ItemGroup>
 
 </Project>
