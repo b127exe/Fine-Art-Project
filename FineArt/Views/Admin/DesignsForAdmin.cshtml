@@ -1,4 +1,44 @@
-﻿@{
+﻿@model IEnumerable<FineArt.Models.Posting>
+@{
     ViewData["Title"] = "Designs";
     Layout = "_AdminLayout";
 }
+
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <h4>Hi, Admin!</h4>
+            <span class="mt-3">This section include all art designs listing...</span>
+        </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Designs</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+<div class="row">
+    <div class="card-columns">
+            @foreach(var post in Model)
+            {   
+                <div class="card card-pin">
+                    <img class="card-img" src="~/posting-uploads/@post.DesignImageUrl" alt="Card image">
+                    <div class="overlay">
+                        <h2 class="card-title title">@post.Title</h2>
+                        <div class="more">
+                            @{
+                                string firstName = post.Student.User is ApplicationUser ? ((ApplicationUser)post.Student.User).First_name : "N/A";
+                                string lastName = post.Student.User is ApplicationUser ? ((ApplicationUser)post.Student.User).Last_name : "N/A";
+                                string fullname = firstName + " " + lastName;
+                            }
+                            <i class="fa fa-paint-brush" aria-hidden="true"></i> By @fullname
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+</div>

@@ -263,7 +263,8 @@ namespace FineArt.Controllers
 
         public IActionResult DesignsForAdmin()
         {
-            return View();
+            var desgin = _context.Postings.Include(s => s.Student.User).ToList();
+            return View(desgin);
         }
     }
 }

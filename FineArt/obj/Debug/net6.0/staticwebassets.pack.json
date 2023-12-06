@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\avatar-uploads\\ba7d359b-028d-4d04-9b6c-1b8295785f73_the-weekend.png"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\bc5697a6-d65e-439a-800f-3237ba8d85b7_1.png",
+      "PackagePath": "staticwebassets\\avatar-uploads\\bc5697a6-d65e-439a-800f-3237ba8d85b7_1.png"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\c29a9c2c-6bea-4d6e-9b93-6815da9a621a_13.png",
       "PackagePath": "staticwebassets\\avatar-uploads\\c29a9c2c-6bea-4d6e-9b93-6815da9a621a_13.png"
     },
@@ -57,8 +61,40 @@
       "PackagePath": "staticwebassets\\images\\get-touch.jpg"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-32.png",
+      "PackagePath": "staticwebassets\\images\\home-32.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-33.jpg",
+      "PackagePath": "staticwebassets\\images\\home-33.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-34.jpg",
+      "PackagePath": "staticwebassets\\images\\home-34.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-35.png",
+      "PackagePath": "staticwebassets\\images\\home-35.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-43.jpg",
+      "PackagePath": "staticwebassets\\images\\home-43.jpg"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-banner.jpg",
       "PackagePath": "staticwebassets\\images\\home-banner.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home6.jpg",
+      "PackagePath": "staticwebassets\\images\\home6.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\letterhead.png",
+      "PackagePath": "staticwebassets\\images\\letterhead.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\logo-text.png",
+      "PackagePath": "staticwebassets\\images\\logo-text.png"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\students-banner-1.jpg",
@@ -15727,6 +15763,10 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\js\\owl.carousel.min.js",
       "PackagePath": "staticwebassets\\lib\\owl-carousel\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\0553ca16-3e1c-444d-ba21-0f8607b4915e_7.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\0553ca16-3e1c-444d-ba21-0f8607b4915e_7.jpg"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\2f612730-6af9-4cd1-8641-cc3ed02f3c60_5.jpg",

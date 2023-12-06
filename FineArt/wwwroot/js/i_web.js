@@ -116,6 +116,18 @@
 
     });
 
+    $("#StudentTxtSearch").keyup(function () {
+        var typeValue = $(this).val();
+        $("#StudentForTeacherBody tr").each(function () {
+            if ($(this).text().search(new RegExp(typeValue, "i")) < 0) {
+                $(this).fadeOut();
+            }
+            else {
+                $(this).show();
+            }
+        });
+    })
+
 });
 
 //function ImgUpload() {
