@@ -171,19 +171,19 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">Main Menu</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-people"></i><span class="nav-text">User Role</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a asp-controller="Admin" asp-action="Roles">Roles</a></li>
-                            <li><a asp-controller="Admin" asp-action="CreateRole">Add Role</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Components</li>
+                    <li class="nav-label">Main Menu</li>
                     @if (User.IsInRole("Admin"))
-                    {           
+                    {
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="icon-list"></i><span class="nav-text">Submissions</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a asp-controller="Admin" asp-action="DesignsForAdmin">Designs</a></li>
+                                <li><a asp-controller="Admin" asp-action="ManagerApproval">Submission</a></li>
+
+                            </ul>   
+                        </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note"></i><span class="nav-text">Approvals</span>
@@ -227,6 +227,16 @@
                             </ul>
                         </li>
                     }
+                    <li class="nav-label first">System Menu</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-people"></i><span class="nav-text">User Role</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a asp-controller="Admin" asp-action="Roles">Roles</a></li>
+                            <li><a asp-controller="Admin" asp-action="CreateRole">Add Role</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

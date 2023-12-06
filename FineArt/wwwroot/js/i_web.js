@@ -90,6 +90,32 @@
             }
         })
     });
+
+    // Competition Submission ajax 
+    $('#CompetitionSubmissionForm').submit(function (event) {
+        event.preventDefault(); 
+
+        // Perform form validation
+        if (validateSubmissionForm()) {
+            // If validation passes, proceed with AJAX submission
+            submitSubmissionForm();
+        }
+    });
+
+    // competition search for teacher section
+    $("#CompetitionTxtSearch").keyup(function () {
+        var typeValue = $(this).val();
+        $("#TCompetitionBody div").each(function () {
+            if ($(this).text().search(new RegExp(typeValue, "i")) < 0) {
+                $(this).fadeOut();
+            }
+            else {
+                $(this).show();
+            }
+        });
+
+    });
+
 });
 
 //function ImgUpload() {
@@ -215,5 +241,139 @@ function ImgUpload() {
             }
         }
         $(this).parent().parent().remove();
+    });
+}
+
+function selectPosting(button, postingId) {
+    // Deselect the previously selected button and hide its icon
+    var previousButton = $('.select-posting.selected');
+    if (previousButton.length) {
+        previousButton.removeClass('selected');
+        previousButton.html("SELECT");
+        previousButton.closest('.card-pin').find('.selected-icon').hide();
+    }
+
+    // Select the clicked button and show its icon
+    $(button).addClass('selected').html("SELECTED");
+    $(button).closest('.card-pin').find('.selected-icon').show();
+    getPostById(postingId);
+    // Update the hidden input field with the selected postingId
+    $('#selectedPostingId').val(postingId);
+}
+
+function getPostById(postingId) {
+    var loaderHtml = `<div class="w-100 d-flex justify-content-center align-items-center">
+                                  <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                </div>`;
+    $("#preview-design").html(loaderHtml);
+    $.ajax({
+        url: "/Web/GetPostById/" + postingId,
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (response, status, xhr) {
+            var img = `<img src="/posting-uploads/${response.designImageUrl}" width="100%" />`;
+            $("#preview-design").html(img);
+        },
+        error: function () {
+            alert("Data can't get...");
+        }
+    });
+}
+
+// posting submission validation and ajax function
+
+function validateSubmissionForm() {
+    // Add your validation logic here
+    // For example, check if the required fields are filled up
+    var isValid = true;
+
+    if ($('#selectedPostingId').val() === '') {
+        toastr.error("Please Select the Posting Design", "Posting Required!", {
+            positionClass: "toast-bottom-right",
+            timeOut: 5e3,
+            closeButton: !0,
+            debug: !1,
+            newestOnTop: !0,
+            progressBar: !0,
+            preventDuplicates: !0,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+            tapToDismiss: !1
+        });
+        isValid = false;
+    } else if ($('#inputPostingSubmission_SubmissionQuote').val() === '') {
+        toastr.error("Please Enter the Submission Quote", "Quote Required!", {
+            positionClass: "toast-bottom-right",
+            timeOut: 5e3,
+            closeButton: !0,
+            debug: !1,
+            newestOnTop: !0,
+            progressBar: !0,
+            preventDuplicates: !0,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+            tapToDismiss: !1
+        });
+        isValid = false;
+    }
+
+    return isValid;
+}
+function submitSubmissionForm() {
+
+    var formData = new FormData($("#CompetitionSubmissionForm")[0]);
+    $(".loading").removeClass("loading-hidden");
+    $.ajax({
+        type: 'POST',
+        url: '/Web/ParticipateInCompetition', 
+        contentType: false,
+        processData: false,
+        data: formData, 
+        success: function (response) {
+            if (response.status == 'success') {
+                $(".loading").addClass("loading-hidden");
+                toastr.success(response.message, "Design Submitted!", {
+                    positionClass: "toast-bottom-right",
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+
+                $("#CompetitionSubmissionForm")[0].reset();
+                var img = `<img src="https://png.pngtree.com/png-clipart/20190925/original/pngtree-no-image-vector-illustration-isolated-png-image_4979075.jpg" width="100%" />`;
+                $("#preview-design").html(img);
+            }
+        },
+        error: function (error) {
+            alert('Failed to send the Data');
+            console.log('Failed ');
+        }
     });
 }

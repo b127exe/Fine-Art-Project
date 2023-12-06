@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Policy;
 
 namespace FineArt.Controllers
@@ -258,6 +259,11 @@ namespace FineArt.Controllers
             {
                 return Json(new { status = "error", message = "An error occurred while processing the form data." });
             }
+        }
+
+        public IActionResult DesignsForAdmin()
+        {
+            return View();
         }
     }
 }

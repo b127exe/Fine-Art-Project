@@ -1,11 +1,14 @@
 ﻿using FineArt.Data;
 using FineArt.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Globalization;
 
 namespace FineArt.Controllers
 {
+	[Authorize]
 	public class WebController : Controller
 	{
 		private readonly FineArtDbContext _context;
@@ -20,7 +23,7 @@ namespace FineArt.Controllers
         }
         public async Task<IActionResult> Index()
 		{
-
+			var userID = HttpContext.Session.GetString("UserId");
 			// get cuurent date
             DateTime currentDate = DateTime.Now;
             //var upcomingCompetition = await _context.Competitions.Where(c => DateTime.Parse(c.StartDate) > currentDate).ToListAsync();
@@ -33,13 +36,26 @@ namespace FineArt.Controllers
 			.Where(c => DateTime.ParseExact(c.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) > currentDate)
 			.Take(3)
 			.ToList();
+            var ongoingCompetition = allCompetitions
+            .Where(c => DateTime.ParseExact(c.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) < currentDate)
+            .ToList();
+
+			var submissions = _context.PostingSubmissions.Include(c => c.Competition).ToList();
 
             FineArtViewModel fineArtModel = new FineArtViewModel()
 			{
-				myCompetitions = upcomingCompetition
+				myCompetitions = upcomingCompetition,
+				ongoingCompetitions = ongoingCompetition,
+				myPostingSubmissions = submissions
 			};
-
-
+			if(userID != null)
+			{
+				var findStudent = _context.Students.FirstOrDefault(s => s.UserId == userID);
+				if(findStudent != null)
+				{
+					ViewData["UserID"] = findStudent.StudentId; 
+				}
+			}
             return View(fineArtModel);
 		}
 		[HttpPost]
@@ -71,8 +87,10 @@ namespace FineArt.Controllers
             return Json(new { status = "error", message = "An error occured while processing the form..." });
         }
 
-		public IActionResult ParticipateInCompetition()
+		public IActionResult ParticipateInCompetition(int? id)
 		{
+			var findCompetition = _context.Competitions.Include(a => a.Award).FirstOrDefault(c => c.CompetitionId == id);		
+
             var userID = HttpContext.Session.GetString("UserId");
             var findStudent =  _context.Students.FirstOrDefault(s => s.UserId == userID);
 			if (findStudent != null)
@@ -81,7 +99,8 @@ namespace FineArt.Controllers
 
 				var fineArt = new FineArtViewModel()
 				{
-					myPostings = userPost
+					myPostings = userPost,
+					inputCompetition = findCompetition
 				};
 				return View(fineArt);
 
@@ -90,27 +109,72 @@ namespace FineArt.Controllers
 				return NotFound();
 			}
 		}
+		[HttpPost]
+		public async Task<IActionResult> ParticipateInCompetition(FineArtViewModel model)
+		{
+            var userID = HttpContext.Session.GetString("UserId");
+            var findStudent = _context.Students.FirstOrDefault(s => s.UserId == userID);
+            if (model.inputPostingSubmission != null && findStudent != null)
+			{
+                DateTime currentDate = DateTime.Now;
+                string formattedDate = currentDate.ToString("yyyy-MM-d");
 
-		public async Task<IActionResult> PostDesigns()
+                PostingSubmission submission = new PostingSubmission()
+				{
+					SubmissionQuote = model.inputPostingSubmission.SubmissionQuote,
+					CompetitionId = model.inputPostingSubmission.CompetitionId,
+					StudentId = findStudent.StudentId,
+					PostingId = model.inputPostingSubmission.PostingId,
+					SubmissionDate = formattedDate,
+					SubmissionStatus = 0
+				};
+				await _context.PostingSubmissions.AddAsync(submission);
+				await _context.SaveChangesAsync();
+                return Json(new { status = "success", message = "Your Design for Competition is submit successfully!" });
+            }
+			else
+			{
+                return Json(new { status = "error", message = "An error occured while processing the form..." });
+            }
+            
+        }
+
+
+        public async Task<IActionResult> PostDesigns()
 		{
 			var DesignPost = await _context.Postings.Include(s => s.Student).ToListAsync();
 			return View(DesignPost);
 		}
 
-		// TEACHER WEBSITE CONTROLS
-		public IActionResult GetStudentsForTeacher()
+		// Ajax Calls for post by id
+		public async Task<IActionResult> GetPostById(int? id)
+		{
+			var data = await _context.Postings.FindAsync(id);
+			return new JsonResult(data);
+		}
+
+        // TEACHER WEBSITE CONTROLS
+        [Authorize(Roles = "Teacher")]
+        public IActionResult GetStudentsForTeacher()
 		{
             var student = _context.Students.Include(u => u.User).ToList();
             return View(student);
 		}
-		public IActionResult GetStudentsForTeacherById(int? id)
+        [Authorize(Roles = "Teacher")]
+        public IActionResult GetStudentsForTeacherById(int? id)
 		{
 			if(id != null)
 			{
 				var findStudent = _context.Students.Include(u => u.User).FirstOrDefault(s => s.StudentId == id);
-				return View(findStudent);
-			}
+                return View(findStudent);
+            }
 			return NotFound();
+		}
+        [Authorize(Roles = "Teacher")]
+        public IActionResult GetCompetitionForTeacher()
+		{
+			var competitions = _context.Competitions.Include(a => a.Award).ToList();
+			return View(competitions);
 		}
 
 

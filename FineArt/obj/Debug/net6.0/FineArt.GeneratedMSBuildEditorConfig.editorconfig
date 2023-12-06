@@ -200,6 +200,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUm9sZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/DesignsForAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVzaWduc0ZvckFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/EditCompetition.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENvbXBldGl0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -286,6 +290,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Shared/_WebLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9XZWJMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Web/GetCompetitionForTeacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2ViXEdldENvbXBldGl0aW9uRm9yVGVhY2hlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Web/GetStudentsForTeacher.cshtml]

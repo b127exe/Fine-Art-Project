@@ -2,6 +2,11 @@
 @{
 	Layout = "_WebLayout";
 }
+<style>
+    .card{
+        width: 23rem !important  
+    }
+</style>
 <div class="loading loading-hidden"></div>
 <div class="modal fade" id="AddPostingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -57,11 +62,10 @@
 
 <div class="container mt-4">
     <h3 class="text-center">Upcoming Competitions</h3>
-              <ul class="cards">
+              <div class="cards">
             @foreach(var upcomingCompetition in Model.myCompetitions)
             {          
-              <li>
-                <a href="" class="card">
+              <div class="card">
 		            <img src="~/images/competition.png" class="card__image" alt="" />
                   <div class="card__overlay">
                     <div class="card__header">
@@ -84,9 +88,73 @@
                                 }
                             }
                     </p>
-                  </div>
-                </a>      
-              </li>
+                  </div>    
+              </div>
             }
-  </ul>
+  </div>
+</div>
+
+<div class="container mt-4">
+    <h3 class="text-center">Ongoing Competitions</h3>
+        @if(Model.ongoingCompetitions.Count > 0)
+        {  
+    <div class="cards">
+        @foreach (var ongoingCompetition in Model.ongoingCompetitions)
+        {
+                <div class="card">
+                    <img src="~/images/competition.png" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                            <div class="card__header-text">
+                                <h3 class="card__title">@Html.DisplayFor(model => ongoingCompetition.CompetitionTitle)</h3>
+                                <span class="badge bg-success">Ongoing</span>
+                            </div>
+                        </div>
+                        <p class="card__description">
+                            <i class='bx bxs-timer'></i>
+                            @{
+                                string dateString = ongoingCompetition.EndDate;
+                                DateTime parsedDate;
+
+                                if (DateTime.TryParse(dateString, out parsedDate))
+                                {
+                                    string formattedDate = parsedDate.ToString("d MMMM, yyyy");
+                                    @formattedDate
+                                }
+                            }
+                        </p>
+                         @if (ViewData["UserID"] != null)
+                         {
+                            var userId = (int?)ViewData["UserID"];
+                            bool hasSubmissions = Model.myPostingSubmissions.Any(submission => submission.CompetitionId == ongoingCompetition.CompetitionId && submission.StudentId == userId);
+                                
+                            <p class="card__description">
+                                @if (hasSubmissions)
+                                {
+                                        <button type="button" class="btn btn-success btn-sm" style="display: flex; justify-content:center;align-items:center;gap:0.4rem;color:#fff">SUBMITTED <i class='bx bx-check-double' style="font-size:26px;color:#fff;"></i></button>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Web" asp-action="ParticipateInCompetition" asp-route-id="@ongoingCompetition.CompetitionId" class="btn btn-warning btn-sm" style="display: flex; justify-content:center;align-items:center;gap:0.4rem;color:#fff">PARTICIPATE NOW <i class='bx bx-right-arrow-alt' style="font-size:26px;color:#fff;"></i></a>
+                                }
+                            </p>
+                         }
+                    </div>
+                </div>
+            }
+
+    </div>
+        }
+        else
+        {
+        <div class="card mt-3" style="width: 100% !important;">
+            <div class="card-body">  
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class='bx bx-info-circle' style="font-size: 72px; color: #999;"></i>
+                    <h2 class="text-center" style="color: #999;"> There is no ongoing competitions right now...</h2>
+                </div>
+            </div>
+        </div>
+        }
 </div>

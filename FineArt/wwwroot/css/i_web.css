@@ -311,3 +311,9 @@
     left: 12px;
     right: auto;
 }
+
+/*Navbar css*/
+.navbar-blur {
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+}

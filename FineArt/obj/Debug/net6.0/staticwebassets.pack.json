@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\avatar-uploads\\ba7d359b-028d-4d04-9b6c-1b8295785f73_the-weekend.png"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\c29a9c2c-6bea-4d6e-9b93-6815da9a621a_13.png",
+      "PackagePath": "staticwebassets\\avatar-uploads\\c29a9c2c-6bea-4d6e-9b93-6815da9a621a_13.png"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\avatar-uploads\\dd2efaf8-a5bb-41dc-b46e-4152fd1e1c9a_Clip Mask Image-1.png",
       "PackagePath": "staticwebassets\\avatar-uploads\\dd2efaf8-a5bb-41dc-b46e-4152fd1e1c9a_Clip Mask Image-1.png"
     },
@@ -47,6 +51,10 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\competition.png",
       "PackagePath": "staticwebassets\\images\\competition.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\get-touch.jpg",
+      "PackagePath": "staticwebassets\\images\\get-touch.jpg"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\home-banner.jpg",
@@ -15681,6 +15689,46 @@
       "PackagePath": "staticwebassets\\lib\\i_web\\jquery\\jquery.min.js"
     },
     {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\ajax-loader.gif",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\ajax-loader.gif"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.carousel.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.carousel.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.theme.default.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.theme.default.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.theme.default.min.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.theme.default.min.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.theme.green.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.theme.green.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.theme.green.min.css",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.theme.green.min.css"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\css\\owl.video.play.png",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\css\\owl.video.play.png"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\js\\owl.carousel.js",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\js\\owl.carousel.js"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\lib\\owl-carousel\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\lib\\owl-carousel\\js\\owl.carousel.min.js"
+    },
+    {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\2f612730-6af9-4cd1-8641-cc3ed02f3c60_5.jpg",
       "PackagePath": "staticwebassets\\posting-uploads\\2f612730-6af9-4cd1-8641-cc3ed02f3c60_5.jpg"
     },
@@ -15695,6 +15743,10 @@
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\c134cb22-c297-4e4a-8f29-ea283b9c8e74_2.jpg",
       "PackagePath": "staticwebassets\\posting-uploads\\c134cb22-c297-4e4a-8f29-ea283b9c8e74_2.jpg"
+    },
+    {
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\posting-uploads\\c3af5059-4725-4684-895d-864261e4e2c3_6.jpg",
+      "PackagePath": "staticwebassets\\posting-uploads\\c3af5059-4725-4684-895d-864261e4e2c3_6.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.FineArt.Microsoft.AspNetCore.StaticWebAssets.props",

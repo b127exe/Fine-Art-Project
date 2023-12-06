@@ -18,7 +18,8 @@
         </ol>
     </div>
 </div>
-
+@if (User.IsInRole("Admin"))
+{   
 <div class="d-flex justify-content-end align-items-end">
     <a asp-controller="Admin" asp-action="AddCompetition" type="button" class="btn btn-rounded btn-primary my-2">
         <span class="btn-icon-left text-primary">
@@ -26,6 +27,7 @@
         </span>Add Competition
     </a>
 </div>
+}
 
 <div class="loading loading-hidden"></div>
 <div class="row">
