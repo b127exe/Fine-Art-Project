@@ -1,0 +1,154 @@
+﻿@model IEnumerable<FineArt.Models.PostingSubmission>
+@{
+    Layout = "_Web2Layout";
+    ViewData["Title"] = "Submissions Remarks";
+}
+<style>
+    .card-pin:hover .overlay {
+        opacity: .5;
+        border: 10px solid #f3f3f3;
+        -webkit-transition: ease .2s;
+        transition: ease .2s;
+        background-color: #000000;
+        cursor: -webkit-zoom-in;
+        cursor: pointer;
+    }
+</style>
+<div class="loading loading-hidden"></div>
+<div class="container" style="margin-top: 130px;">
+    @if(Model.Any())
+    {
+    <div class="row">
+        <div class="card-columns">
+        @foreach (var submission in Model)
+        {
+                <div class="card card-pin">
+                    <img class="card-img" src="~/posting-uploads/@submission.Posting.DesignImageUrl" alt="Card image">
+                    <div class="overlay">
+                        <h2 class="card-title title">@submission.Posting.Title</h2>
+                        <div class="more">
+                            <a href="#!" role="button" data-bs-toggle="modal" data-bs-target="#SubmissionDetail_@submission.SubmissionId">
+                               <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                @*Submission Detail Modal*@
+                <div class="modal fade" id="SubmissionDetail_@submission.SubmissionId" tabindex="-1" aria-labelledby="SubmissionDetailLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="SubmissionDetailLabel">Submission Details</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center">Participate In <br /> <strong style="font-size: 28px;">@submission.Competition.CompetitionTitle</strong></p>
+                                <ul class="list-group my-3 list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <span>Participant Name</span>
+                                        <span>
+                                            @{
+                                                string firstName = submission.Student.User is ApplicationUser ? ((ApplicationUser)submission.Student.User).First_name : "N/A";
+                                                string lastName = submission.Student.User is ApplicationUser ? ((ApplicationUser)submission.Student.User).Last_name : "N/A";
+                                                string fullName = firstName + " " + lastName;
+                                                @fullName
+                                            }
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <span>Submitted Date</span>
+                                        <span class="badge bg-dark">
+                                            @{
+                                                string dateString = submission.SubmissionDate;
+                                                DateTime parsedDate;
+
+                                                if (DateTime.TryParse(dateString, out parsedDate))
+                                                {
+                                                    string formattedDate = parsedDate.ToString("d MMMM, yyyy");
+                                                    @formattedDate
+                                                }
+                                            }
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <span>Contest Announcment Date</span>
+                                        <span class="badge bg-dark">
+                                            @{
+                                                string contestDate = submission.Competition.EndDate;
+                                                DateTime parsedContestDate;
+
+                                                if (DateTime.TryParse(contestDate, out parsedContestDate))
+                                                {
+                                                    string formattedDate = parsedDate.ToString("d MMMM, yyyy");
+                                                    @formattedDate
+                                                }
+                                            }
+                                        </span>
+                                    </li>
+                                </ul>
+                                <p class="text-center"><strong>Submission Quote</strong> <br />
+                                    <i class='bx bxs-quote-left' style="color:#333;"></i>
+                                    @submission.SubmissionQuote
+                                    <i class='bx bxs-quote-right' style="color:#333;"></i>
+                                </p>
+
+                                <div class="accordion" id="GiveRemarksAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Give Remarks
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#GiveRemarksAccordion">
+                                            <div class="accordion-body">
+                                                <form method="post" class="GiveRemarksForm">
+                                                    <input type="hidden" value="@submission.SubmissionId" name="SubmissionId"/>
+                                                    <div class="form-group my-2">
+                                                        <label for="Marks">Impression</label>
+
+                                                        <select name="Marks" id="Marks" class="form-control mt-2 Marks">
+                                                            <option value="" selected>Select Impression</option>
+                                                            @foreach (MarkStatus mark in Enum.GetValues(typeof(MarkStatus)))
+                                                            {
+                                                                <option value="@mark">@mark</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group my-2">
+                                                        <label for="Comments">Comment</label>
+                                                        <input type="text" name="Comments" id="Comments" class="form-control mt-2 Comments" />
+                                                    </div>
+                                                    <div class="d-grid my-2">
+                                                        <input type="submit" class="btn btn-warning"/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        }
+       </div>
+        </div>
+    }
+    else 
+    {
+    <div class="card mt-3" style="width: 100% !important;">
+            <div class="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class='bx bx-info-circle' style="font-size: 72px; color: #999;"></i>
+                    <h2 class="text-center" style="color: #999;"> There is no submitted design here right now...</h2>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

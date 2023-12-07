@@ -102,6 +102,20 @@
         }
     });
 
+    // Remarks Ajax
+    $('.GiveRemarksForm').submit(function (event) {
+        //console.log("clciked");
+        event.preventDefault();
+
+        var form = $(this);
+
+        // Perform form validation
+        if (validateRemarksForm(form)) {
+            // If validation passes, proceed with AJAX submission
+            submitRemarksForm(form);
+        }
+    });
+
     // competition search for teacher section
     $("#CompetitionTxtSearch").keyup(function () {
         var typeValue = $(this).val();
@@ -381,6 +395,98 @@ function submitSubmissionForm() {
                 $("#CompetitionSubmissionForm")[0].reset();
                 var img = `<img src="https://png.pngtree.com/png-clipart/20190925/original/pngtree-no-image-vector-illustration-isolated-png-image_4979075.jpg" width="100%" />`;
                 $("#preview-design").html(img);
+            }
+        },
+        error: function (error) {
+            alert('Failed to send the Data');
+            console.log('Failed ');
+        }
+    });
+}
+
+// give remarks submission functions and ajax
+
+function validateRemarksForm(form) {
+    var isValid = true;
+
+    if (form.find('.Comments').val() === '') {
+        toastr.error("Please fill up comments section...", "Comments Required!", {
+            positionClass: "toast-bottom-right",
+            timeOut: 5e3,
+            closeButton: !0,
+            debug: !1,
+            newestOnTop: !0,
+            progressBar: !0,
+            preventDuplicates: !0,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+            tapToDismiss: !1
+        });
+        isValid = false;
+    } else if (form.find('.Marks').val() === '') {
+        toastr.error("Please select an impression", "Impression Required!", {
+            positionClass: "toast-bottom-right",
+            timeOut: 5e3,
+            closeButton: !0,
+            debug: !1,
+            newestOnTop: !0,
+            progressBar: !0,
+            preventDuplicates: !0,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+            tapToDismiss: !1
+        });
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function submitRemarksForm(form) {
+    var formData = new FormData(form[0]);
+    $(".loading").removeClass("loading-hidden");
+    $.ajax({
+        type: 'POST',
+        url: '/Web/GiveRemarksForDesign',
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            if (response.status == 'success') {
+                $(".loading").addClass("loading-hidden");
+                toastr.success(response.message, "Remarks Submitted!", {
+                    positionClass: "toast-bottom-right",
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+
+                form[0].reset();
+                $(".modal").modal("hide");
             }
         },
         error: function (error) {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Policy;
 
@@ -265,6 +266,24 @@ namespace FineArt.Controllers
         {
             var desgin = _context.Postings.Include(s => s.Student.User).ToList();
             return View(desgin);
+        }
+
+        public async Task<IActionResult> CompetitionSubmission()
+        {
+            DateTime currentDate = DateTime.Now;
+
+            var competitions = await _context.Competitions.ToListAsync();
+
+            var ongoingCompetition = competitions
+           .Where(c => DateTime.ParseExact(c.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) < currentDate)
+           .ToList();
+
+            return View(ongoingCompetition);
+        }
+
+        public async Task<IActionResult> SubmissionDesignByStudent(int? id)
+        {
+            return View();
         }
     }
 }

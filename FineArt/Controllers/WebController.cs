@@ -146,8 +146,38 @@ namespace FineArt.Controllers
 			return View(DesignPost);
 		}
 
-		// Ajax Calls for post by id
-		public async Task<IActionResult> GetPostById(int? id)
+		public IActionResult GiveRemarksForDesign(int? id)
+		{
+			var submission = _context.PostingSubmissions.Include(c => c.Competition).Include(c => c.Posting).Include(c => c.Student).ThenInclude(s => s.User).Where(c => c.CompetitionId == id).ToList();
+			return View(submission);
+		}
+		[HttpPost]
+		public async Task<IActionResult> GiveRemarksForDesign(SubmissionRemarks model)
+		{
+			if(model != null)
+			{
+				MarkStatus markStatus = model.Marks;
+				SubmissionRemarks submissionRemarks = new SubmissionRemarks()
+				{
+					Marks = markStatus,
+					Comments = model.Comments,
+					SubmissionId = model.SubmissionId
+				};
+
+				await _context.SubmissionRemarks.AddAsync(submissionRemarks);
+				await _context.SaveChangesAsync();
+
+				return Json(new { status = "success", message = "Your Remarks is submit successfully!" });
+			}
+			else
+			{
+                return Json(new { status = "error", message = "An error occured while processing the form..." });
+            }
+
+        }
+
+        // Ajax Calls for post by id
+        public async Task<IActionResult> GetPostById(int? id)
 		{
 			var data = await _context.Postings.FindAsync(id);
 			return new JsonResult(data);

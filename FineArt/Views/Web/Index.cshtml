@@ -3,8 +3,8 @@
 	Layout = "_WebLayout";
 }
 <style>
-    .card{
-        width: 23rem !important  
+    .cards{
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important    
     }
 </style>
 <div class="loading loading-hidden"></div>
@@ -62,7 +62,10 @@
 
 <div class="container mt-4">
     <h3 class="text-center">Upcoming Competitions</h3>
-              <div class="cards">
+    @if(Model.myCompetitions.Count > 0)
+    {
+        
+    <div class="cards">
             @foreach(var upcomingCompetition in Model.myCompetitions)
             {          
               <div class="card">
@@ -91,7 +94,19 @@
                   </div>    
               </div>
             }
-  </div>
+        </div>
+    }
+    else
+    {
+        <div class="card mt-3" style="width: 100% !important;">
+            <div class="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class='bx bx-info-circle' style="font-size: 72px; color: #999;"></i>
+                    <h2 class="text-center" style="color: #999;"> There is no upcoming competitions right now...</h2>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 <div class="container mt-4">
@@ -107,7 +122,7 @@
                         <div class="card__header">
                             <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
                             <div class="card__header-text">
-                                <h3 class="card__title">@Html.DisplayFor(model => ongoingCompetition.CompetitionTitle)</h3>
+                                <a style="text-decoration: none;" asp-controller="Web" asp-action="GiveRemarksForDesign" asp-route-id="@ongoingCompetition.CompetitionId"><h3 class="card__title">@Html.DisplayFor(model => ongoingCompetition.CompetitionTitle)</h3></a>
                                 <span class="badge bg-success">Ongoing</span>
                             </div>
                         </div>
