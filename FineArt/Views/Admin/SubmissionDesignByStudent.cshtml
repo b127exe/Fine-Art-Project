@@ -1,4 +1,47 @@
-﻿@{
+﻿@model IEnumerable<FineArt.Models.PostingSubmission>
+@{
     ViewData["Title"] = "Submissions";
     Layout = "_AdminLayout";
 }
+
+
+<div class="loading loading-hidden"></div>
+<div class="row">
+    @foreach(var submission in Model)
+    {
+    <div class="col-xl-4 col-xxl-6 col-lg-6 col-sm-6">
+            <div class="card">
+                <img class="card-img-top img-fluid" src="~/posting-uploads/@submission.Posting.DesignImageUrl" alt="Card image cap">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="card-title"></h5>
+                    <div class="dropdown custom-dropdown show">
+                        <button class="btn" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-157px, -134px, 0px);">
+                            <div class="sweetalert dropdown-item">
+                                <button class="btn competition-delete" data-id="">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> </p>
+                    <div class="basic-list-group">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text d-inline">
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

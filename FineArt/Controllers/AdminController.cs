@@ -17,12 +17,14 @@ namespace FineArt.Controllers
         private readonly FineArtDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<AdminController> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminController(FineArtDbContext context, RoleManager<IdentityRole> roleManager, ILogger<AdminController> logger)
+        public AdminController(FineArtDbContext context, RoleManager<IdentityRole> roleManager, ILogger<AdminController> logger, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _roleManager = roleManager;
             _logger = logger;
+            _userManager = userManager;
 
         }
 
@@ -283,7 +285,15 @@ namespace FineArt.Controllers
 
         public async Task<IActionResult> SubmissionDesignByStudent(int? id)
         {
-            return View();
+            var submission = await _context.PostingSubmissions.Include(p => p.Posting).Include(s => s.Student).ThenInclude(s => s.User).Where(c => c.CompetitionId == id).ToListAsync();
+            return View(submission);
+        }
+
+        // Dashboard home ajax call functions
+        public async Task<IActionResult> GetUserCount()
+        {
+            var userCount = await _userManager.Users.CountAsync();
+            return Json(new { status = "success", data = userCount });
         }
     }
 }

@@ -360,4 +360,23 @@
 
         })
     });
+
+    LoadHomeCountData();
+
 });
+
+function LoadHomeCountData() {
+    $.ajax({
+        url: "/Admin/GetUserCount",
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (response, status, xhr) {
+            console.log(response);
+            $("#TotalUsers").html(response.data);
+        },
+        error: function () {
+            alert("Data can't get...");
+        }
+    });
+}

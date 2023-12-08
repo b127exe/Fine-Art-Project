@@ -10,5 +10,7 @@
         public Posting inputPosting { get; set; }
         public PostingSubmission inputPostingSubmission { get; set; }
         public Competition inputCompetition { get; set; }
+        public SubmissionRemarks inputSubmissionRemarks { get; set; }
+        public List<SubmissionRemarks> mySubmissionRemarks { get; set; }
     }
 }
