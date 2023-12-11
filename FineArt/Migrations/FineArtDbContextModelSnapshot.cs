@@ -214,7 +214,14 @@ namespace FineArt.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ExStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExhibitionDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExhibitionTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+pWXHuyaNkEgBGgd3iAu2gNVuPy8pqtcpyvsgTgtmAU=",
+  "Hash": "sC3iAnH8ajRlkv9AZVMXOzBCM+jWpnGcfy2agSzr1DM=",
   "Source": "FineArt",
   "BasePath": "_content/FineArt",
   "Mode": "Default",
@@ -1258,12 +1258,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\favicon.ico",
+      "Identity": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\favicon.png",
       "SourceId": "FineArt",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\",
       "BasePath": "_content/FineArt",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "favicon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1272,7 +1272,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
       "Identity": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\competition.png",

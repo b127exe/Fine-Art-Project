@@ -14,6 +14,10 @@
         weekStart: 0,
         time: false
     });
+    $('#ExhibitionDate').bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false
+    });
     $('#timepicker').bootstrapMaterialDatePicker({
         format: 'HH:mm',
         time: true,

@@ -1,3 +1,19 @@
+/*Custom Scrollbar*/
+
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #bababa;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
 /*Custom waiting loader css*/
 @keyframes anima1 {
     0% {

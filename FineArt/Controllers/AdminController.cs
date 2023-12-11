@@ -189,7 +189,7 @@ namespace FineArt.Controllers
 
         public IActionResult CompetitionsList()
         {
-            var competitions = _context.Competitions.ToList();
+            var competitions = _context.Competitions.Where(c => c.Status == 0).ToList();
             return View(competitions);
         }
         public IActionResult AddCompetition()
@@ -273,27 +273,176 @@ namespace FineArt.Controllers
         public async Task<IActionResult> CompetitionSubmission()
         {
             DateTime currentDate = DateTime.Now;
-
             var competitions = await _context.Competitions.ToListAsync();
 
             var ongoingCompetition = competitions
-           .Where(c => DateTime.ParseExact(c.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) < currentDate)
-           .ToList();
+        .Where(c => DateTime.ParseExact(c.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= currentDate)
+        .Where(c => DateTime.ParseExact(c.EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= currentDate)
+        .Where(c => c.Status == 0)
+        .ToList();
+
+            //var competitionsWithEqualEndDate = competitions
+            //    .Where(c => DateTime.ParseExact(c.EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) == currentDate)
+            //    .ToList();
+
+            var competitionsWithEqualOrOneDayAfterEndDate = competitions
+        .Where(c => DateTime.ParseExact(c.EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= currentDate.AddDays(-1) &&
+                    DateTime.ParseExact(c.EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= currentDate)
+        .Where(c => c.Status == 0)
+        .ToList();
+
+            ongoingCompetition.AddRange(competitionsWithEqualOrOneDayAfterEndDate);
 
             return View(ongoingCompetition);
         }
 
         public async Task<IActionResult> SubmissionDesignByStudent(int? id)
         {
-            var submission = await _context.PostingSubmissions.Include(p => p.Posting).Include(s => s.Student).ThenInclude(s => s.User).Where(c => c.CompetitionId == id).ToListAsync();
+            var submission = await _context.PostingSubmissions.Include(p => p.Posting).Include(c => c.Competition).Include(s => s.Student).ThenInclude(s => s.User).Where(c => c.CompetitionId == id).ToListAsync();
             return View(submission);
+        }
+
+        public async Task<IActionResult> GetSubmissionRemarks(int? id)
+        {
+            if(id != null)
+            {
+                var remarks = await _context.SubmissionRemarks.Where(s => s.SubmissionId == id).ToListAsync();
+                var marks = await _context.SubmissionRemarks.Where(sr => sr.SubmissionId == id)
+                .GroupBy(sr => sr.Marks)
+                .Select(group => new
+                {
+                    Mark = group.Key,
+                    Count = group.Count(),
+                }).ToListAsync();
+
+                return Json(new { status = "success", message = "remarks get successfully...", remarks = remarks, marks = marks, submissionId = id });
+            }
+            else
+            {
+                return Json(new { status = "error", message = "an error occure while getting the remarks..." });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> AnnounceCompetitionWinner(int? id)
+        {
+            if (id != null)
+            {
+                var findSubmission = await _context.PostingSubmissions.FindAsync(id);
+                if(findSubmission != null)
+                {
+                    //Update the one status to 1 means (winner)
+                    findSubmission.SubmissionStatus = 1;
+                    _context.Update(findSubmission);
+                    await _context.SaveChangesAsync();
+
+                    //Update those who have 0 status to 2 means (failed)
+                    var submissionWithZeroStatus = await _context.PostingSubmissions.Where(s => s.SubmissionStatus == 0).ToListAsync();
+                    foreach (var submissions in submissionWithZeroStatus)
+                    {
+                        submissions.SubmissionStatus = 2;
+                        _context.Update(submissions);
+                    }
+                    await _context.SaveChangesAsync();
+
+                    //Award the Student
+                    string remarks = "First Congratulations and As an administrator, I want to express my appreciation for your hard work and commitment to excellence. Your success in this competition reflects positively on both your individual abilities and the overall artistic community within our institution. We are proud to have such talented individuals contributing to the vibrant creative atmosphere here.";
+                    AwardedStudent awardedStudent = new AwardedStudent()
+                    {
+                        AwardRemarks = remarks,
+                        StudentId = findSubmission.StudentId,
+                        PostingId = findSubmission.PostingId,
+                        CompetitionId = findSubmission.CompetitionId
+                    };
+                    await _context.AwardedStudents.AddAsync(awardedStudent);
+                    await _context.SaveChangesAsync();
+
+                    // reward the amount of award to student 
+                    var awardAmount = await _context.Competitions.Include(a => a.Award).FirstOrDefaultAsync(c => c.CompetitionId == findSubmission.CompetitionId);
+                    var findStudent = await _context.Students.FindAsync(findSubmission.StudentId);
+                    if(findStudent.WalletAmount != null)
+                    {
+                        findStudent.WalletAmount += awardAmount.Award.AwardAmount;
+                        _context.Students.Update(findStudent);
+                    }
+                    else
+                    {
+                        findStudent.WalletAmount = awardAmount.Award.AwardAmount;
+                        _context.Students.Update(findStudent);
+                    }
+                    await _context.SaveChangesAsync();
+
+
+                    // End the competition
+                    var endCompetition = await _context.Competitions.FindAsync(findSubmission.CompetitionId);
+                    if(endCompetition != null)
+                    {
+                        endCompetition.Status = 1;
+                        _context.Competitions.Update(endCompetition);
+                        await _context.SaveChangesAsync();
+                    }
+
+                }
+                return Json(new { status = "success", message = "The winner of the competition is successfully annnounce!" });
+
+            }
+            else
+            {
+                return Json(new { status = "error", message = "an error occure while announce the winner..." });
+            }
+        }
+
+        // Exhibition work start here 
+        public IActionResult AddExhibition()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddExhibition(Exhibition model)
+        {
+            if(model != null)
+            {
+                var userID = HttpContext.Session.GetString("UserId");
+                var findAdminManager = await _context.AdminManager.FirstOrDefaultAsync(u => u.UserId == userID);
+                if(findAdminManager != null)
+                { 
+                    Exhibition exhibition = new Exhibition()
+                    {
+                        ExhibitionTitle = model.ExhibitionTitle,
+                        ExhibitionDate = model.ExhibitionDate,
+                        Details = model.Details,
+                        Conditions = model.Conditions,
+                        Country = model.Country,
+                        AdminManagerId = findAdminManager.AdminManagerId,
+                        ExStatus = 0
+                    };
+
+                    await _context.Exhibitions.AddAsync(exhibition);
+                    await _context.SaveChangesAsync();
+
+                }
+                return Json(new { status = "success", message = "The Exhibition is added successfully!" });
+            }
+            else
+            {
+                return Json(new { status = "error", message = "an error occure while submitting the form..." });
+            }
+        }
+        
+        public IActionResult ExhibitionsList()
+        {
+            return View();
         }
 
         // Dashboard home ajax call functions
         public async Task<IActionResult> GetUserCount()
         {
             var userCount = await _userManager.Users.CountAsync();
-            return Json(new { status = "success", data = userCount });
+
+            var studentCount = await _userManager.GetUsersInRoleAsync("Student");
+            var teacherCount = await _userManager.GetUsersInRoleAsync("Teacher");
+            var managerCount = await _userManager.GetUsersInRoleAsync("Manager");
+
+            return Json(new { status = "success", totalUser = userCount, totalStudent = studentCount.Count, totalTeacher = teacherCount.Count, totalManager = managerCount.Count });
         }
     }
 }

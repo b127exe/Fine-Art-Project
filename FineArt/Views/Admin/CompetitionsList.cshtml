@@ -37,17 +37,18 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">@item.CompetitionTitle</h5>
-                    <div class="dropdown custom-dropdown show">
-                        <button class="btn" data-toggle="dropdown" aria-expanded="true">
-                            <i class="fa fa-ellipsis-v"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-157px, -134px, 0px);">
-                            <a class="dropdown-item" asp-controller="Admin" asp-action="EditCompetition" asp-route-id="@item.CompetitionId">Edit</a>
-                            <div class="sweetalert dropdown-item">
-                                <button class="btn competition-delete" data-id="@item.CompetitionId">Delete</button>
+                    
+                        <div class="dropdown custom-dropdown show">
+                            <button class="btn" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-157px, -134px, 0px);">
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="EditCompetition" asp-route-id="@item.CompetitionId">Edit</a>
+                                <div class="sweetalert dropdown-item">
+                                    <button class="btn competition-delete" data-id="@item.CompetitionId">Delete</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
             </div>
             <div class="card-body">
                 <p class="card-text"><strong>Term & Conditions : </strong> @item.Conditions</p>
@@ -68,9 +69,13 @@
                         {
                             <span class="badge badge-success badge-pill">Ongoing</span>
                         }
-                        else
+                        else if (GetCompetitionStatus(item.StartDate, item.EndDate) == "Upcoming")
                         {
                             <span class="badge badge-warning badge-pill">Upcoming</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-danger badge-pill">Ended</span>
                         }
                     </p>
             </div>
@@ -92,7 +97,7 @@
             {
                 return "Upcoming";
             }
-            else if (currentDate >= startDate && currentDate <= endDate)
+            else if (currentDate >= startDate && currentDate.AddDays(-1) <= endDate)
             {
                 return "Ongoing";
             }

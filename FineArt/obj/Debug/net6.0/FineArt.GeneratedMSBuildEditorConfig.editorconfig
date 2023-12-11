@@ -188,6 +188,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQ29tcGV0aXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/AddExhibition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkRXhoaWJpdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/AwardsList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXdhcmRzTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -214,6 +218,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/EditRole.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFJvbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/ExhibitionsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRXhoaWJpdGlvbnNMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ASP .Net Core projects/Apps/FineArt/FineArt/Views/Admin/Index.cshtml]

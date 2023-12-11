@@ -11,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>@ViewBag.Title - FineArt</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon.png">
+
     <link href="~/lib/i_admin/vendor/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/lib/i_admin/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/i_admin/vendor/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" asp-append-version="true" />
@@ -27,13 +30,13 @@
 </head>
 <body>
 
-    <div id="preloader">
+    <@*div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>
+    </div>*@
 
 	<div id="main-wrapper">
 
@@ -227,6 +230,15 @@
                             </ul>
                         </li>
                     }
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                           <i class="icon icon-globe-2"></i><span class="nav-text">Exhibition</span>
+                        </a>
+                        <ul aria-expanded="false">
+                           <li><a asp-controller="Admin" asp-action="AddExhibition">Add Exhibition</a></li>
+                           <li><a asp-controller="Admin" asp-action="ExhibitionsList">Exhibitions</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-label first">System Menu</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -266,18 +278,18 @@
 	<script src="~/lib/i_admin/js/quixnav-init.js"></script>
 	<script src="~/lib/i_admin/js/custom.min.js"></script>
 
+    <script src="~/lib/i_admin/vendor/raphael/raphael.min.js" asp-append-version="true"></script>
+    <script src="~/lib/i_admin/vendor/morris/morris.min.js" asp-append-version="true"></script>
+
     <script src="~/lib/i_admin/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/lib/i_admin/js/plugins-init/jquery.validate-init.js"></script>
 
 	<script src="~/lib/i_admin/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
-	<script src="~/lib/i_admin/vendor/raphael/raphael.min.js"></script>
-	@*<script src="~/lib/i_admin/vendor/morris/morris.min.js"></script>*@
-
 	<script src="~/lib/i_admin/vendor/circle-progress/circle-progress.min.js"></script>
-	@*<script src="~/lib/i_admin/vendor/chart.js/chart.bundle.min.js"></script>*@
+	<script src="~/lib/i_admin/vendor/chart.js/chart.bundle.min.js"></script>
 
-	@*<script src="~/lib/i_admin/vendor/gaugejs/dist/gauge.min.js"></script>*@
+	<script src="~/lib/i_admin/vendor/gaugejs/dist/gauge.min.js"></script>
 
 
     <script src="~/lib/i_admin/vendor/moment/moment.min.js"></script>
@@ -307,7 +319,10 @@
 
     <script src="~/lib/i_admin/vendor/select2/js/select2.full.min.js"></script>
     <script src="~/lib/i_admin/js/plugins-init/select2-init.js"></script>
+
+    @*<script src="~/lib/i_admin/js/plugins-init/morris-init.js"></script>*@
 	
+
 	<script src="~/lib/i_admin/js/dashboard/dashboard-1.js" asp-append-version="true"></script>
     <script src="~/js/i_admin.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

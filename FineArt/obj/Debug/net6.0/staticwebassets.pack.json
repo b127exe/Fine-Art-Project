@@ -49,8 +49,8 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
     },
     {
       "Id": "D:\\ASP .Net Core projects\\Apps\\FineArt\\FineArt\\wwwroot\\images\\competition.png",

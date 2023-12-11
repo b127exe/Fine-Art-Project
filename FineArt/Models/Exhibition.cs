@@ -8,11 +8,14 @@ namespace FineArt.Models
 		[Key]
 		public int ExhibitionId { get; set; }
         [Required]
+        public string ExhibitionTitle { get; set; }
+        [Required]
         public string ExhibitionDate { get; set; }
         [Required]
         public string Details { get; set; }
         [Required]
         public string Conditions { get; set; }
+        public int ExStatus { get; set; }
 
         [ForeignKey("AdminManager")]
         public int AdminManagerId { get; set; }

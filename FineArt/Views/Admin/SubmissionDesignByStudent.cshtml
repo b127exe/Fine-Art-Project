@@ -3,9 +3,75 @@
     ViewData["Title"] = "Submissions";
     Layout = "_AdminLayout";
 }
+<style>
 
+    .message-blue {
+        position: relative;
+        /*margin-left: 20px;*/
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #A8DDFD;
+        width: 100%;
+        height: 73px;
+        text-align: left;
+        font-size: 1em;
+        font-weight: 400;
+        color: #333;
+        border: 1px solid #97C6E3;
+        border-radius: 10px;
+    }
+
+    .message-content {
+        padding: 0;
+        margin: 0;
+    }
+
+    .message-timestamp-right {
+        position: absolute;
+        font-size: .85em;
+        font-weight: 300;
+        bottom: 5px;
+        /*right: 5px;*/
+    }
+
+    .message-timestamp-left {
+        position: absolute;
+        font-size: .93em;
+        font-weight: 300;
+        bottom: 5px;
+        /*left: 5px;*/
+    }
+
+    .message-blue:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 15px solid #A8DDFD;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        top: 0;
+        left: -15px;
+    }
+
+    .message-blue:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 17px solid #97C6E3;
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        top: -1px;
+        left: -17px;
+    }
+
+
+</style>
 
 <div class="loading loading-hidden"></div>
+    @if(Model.Any())
+    {
 <div class="row">
     @foreach(var submission in Model)
     {
@@ -13,35 +79,130 @@
             <div class="card">
                 <img class="card-img-top img-fluid" src="~/posting-uploads/@submission.Posting.DesignImageUrl" alt="Card image cap">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="card-title"></h5>
+                    <h5 class="card-title">Submission Design By <br /> 
+                        @{
+                            string firstName = submission.Student.User is ApplicationUser ? ((ApplicationUser)submission.Student.User).First_name : "N/A";
+                            string lastName = submission.Student.User is ApplicationUser ? ((ApplicationUser)submission.Student.User).Last_name : "N/A";
+                            string fullname = firstName + " " + lastName;
+                            @fullname
+                        } 
+                    </h5>
                     <div class="dropdown custom-dropdown show">
                         <button class="btn" data-toggle="dropdown" aria-expanded="true">
                             <i class="fa fa-ellipsis-v"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-157px, -134px, 0px);">
-                            <div class="sweetalert dropdown-item">
-                                <button class="btn competition-delete" data-id="">Delete</button>
-                            </div>
+                             <button class="btn check-remarks" data-id="@submission.SubmissionId">Check Remarks</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-text"> </p>
+                    <h4>@submission.Posting.Title.ToUpper()</h4>
                     <div class="basic-list-group">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Submitted Date </span>
+                                <span>
+                                    @{
+                                        string dateSubmitted = submission.SubmissionDate;
+                                        DateTime parsedSubmittedDate;
+
+                                        if (DateTime.TryParse(dateSubmitted, out parsedSubmittedDate))
+                                        {
+                                            string formattedDate = parsedSubmittedDate.ToString("d MMMM, yyyy");
+                                            @formattedDate
+                                        }
+                                    }
+                                </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>End Date </span>
+                                <span>
+                                    @{
+                                        string endDate = submission.Competition.EndDate;
+                                        DateTime parsedDate;
+
+                                        if (DateTime.TryParse(endDate, out parsedDate))
+                                        {
+                                            string formattedEndDate = parsedDate.ToString("d MMMM, yyyy");
+                                            @formattedEndDate
+                                        }
+                                    }
+                                </span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <p class="card-text d-inline">
-                        
-                    </p>
+                @{
+                    DateTime currentDate = DateTime.Now;
+                    DateTime endDateString = DateTime.Parse(submission.Competition.EndDate);
+                    bool areDatesEqual = currentDate.Date >= endDateString.Date.AddDays(-1);
+                }
+                @if (areDatesEqual)
+                {
+                    <div class="d-grid sweetalert">
+                    <button type="button" class="btn btn-outline-warning btn-block submission-approved" data-id="@submission.SubmissionId">SELECT FOR WINNER</button>
+                </div>
+                }
+                else
+                {
+                    <span class="text-center my-2"><i class="icon-info"></i> Competition have stills days left...</span>
+                }
+
+                
+            </div>
+        </div>
+
+        @* Modal *@
+        <div class="modal fade" id="chechRemarksModal_@submission.SubmissionId">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remarks Details</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Remarks Statistics</h4>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="chart py-4">
+                                            <canvas id="remark-product_@submission.SubmissionId" style="height: 230px !important;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="card-title">Comments</h4>
+                        <div class="container msg-box_@submission.SubmissionId" style="height:200px;overflow:hidden; overflow-y:scroll;margin: 0;">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    }
+        }
 </div>
+    }
+    else
+    {
+        <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>No Submissions!</h4>
+                    <span class="mt-3">There is no submissions for this competition right now...</span>
+                </div>
+            </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a asp-controller="Admin" asp-action="CompetitionSubmission">Back</a></li>
+            </ol>
+        </div>
+        </div>
+    }
+
