@@ -12,5 +12,6 @@
         public Competition inputCompetition { get; set; }
         public SubmissionRemarks inputSubmissionRemarks { get; set; }
         public List<SubmissionRemarks> mySubmissionRemarks { get; set; }
+        public List<Exhibition> myExhibitions { get; set; }
     }
 }

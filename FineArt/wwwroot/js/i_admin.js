@@ -491,8 +491,77 @@
         }
     });
 
+    $('#EditExhibitionForm').submit(function (event) {
+        event.preventDefault();
+
+        var form = $(this);
+        // Perform form validation
+        if (validateExhibitionForm(form)) {
+            submitEditExhibitionForm(form);
+        }
+    });
+
+
+    $(".exhibition-delete").on("click", function () {
+
+        let id = $(this).data("id");
+        swal({
+            title: "Are you sure to delete ?",
+            text: "After delete this Exhibition is no longer in list !",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it !!",
+            closeOnConfirm: !1,
+            preConfirm: () => {
+                $(".loading").removeClass("loading-hidden");
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/DeleteExhibition',
+                    data: { id: id },
+                    success: function (res) {
+                        if (res.status == 'success') {
+                            $(".loading").addClass("loading-hidden");
+                            toastr.warning("Exhibition delete successfully", "Deleted!", {
+                                positionClass: "toast-bottom-right",
+                                timeOut: 5e3,
+                                closeButton: !0,
+                                debug: !1,
+                                newestOnTop: !0,
+                                progressBar: !0,
+                                preventDuplicates: !0,
+                                onclick: null,
+                                showDuration: "300",
+                                hideDuration: "1000",
+                                extendedTimeOut: "1000",
+                                showEasing: "swing",
+                                hideEasing: "linear",
+                                showMethod: "fadeIn",
+                                hideMethod: "fadeOut",
+                                tapToDismiss: !1
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 3000)
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to receive the Data');
+                        console.log('Failed ');
+                    }
+                });
+            }
+        }, function () {
+
+        })
+    });
+
+
     // load home content with get method
     LoadHomeCountData();
+
+    // load the country api function 
+    fetchCountryApi();
 
 });
 
@@ -724,6 +793,10 @@ function submitExhibitionForm(form) {
                 });
 
                 form[0].reset();
+
+                setTimeout(function () {
+                    window.location.href = "/Admin/ExhibitionsList";
+                }, 3000);
             }
         },
         error: function (error) {
@@ -731,4 +804,69 @@ function submitExhibitionForm(form) {
             console.log('Failed ');
         }
     });
+}
+
+function submitEditExhibitionForm(form) {
+    var formData = new FormData(form[0]);
+    $(".loading").removeClass("loading-hidden");
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/EditExhibition',
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            if (response.status == 'success') {
+                $(".loading").addClass("loading-hidden");
+                toastr.success(response.message, "Exhibition Edited!", {
+                    positionClass: "toast-bottom-right",
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+
+                form[0].reset();
+
+                setTimeout(function () {
+                    window.location.href = "/Admin/ExhibitionsList";
+                }, 3000);
+            }
+        },
+        error: function (error) {
+            alert('Failed to send the Data');
+            console.log('Failed ');
+        }
+    });
+}
+
+function fetchCountryApi() {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            // Get the select element
+            const selectElement = document.getElementById('ExCountry');
+
+            // Loop through the data and populate the options
+            data.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.name.common;
+                option.text = country.name.common;
+                selectElement.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
 }

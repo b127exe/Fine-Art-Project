@@ -29,5 +29,6 @@ namespace FineArt.Models
         public ICollection<Posting> postings { get; set; }
         public ICollection<PostingSubmission> postingSubmissions { get; set; }
         public ICollection<AwardedStudent> awardedStudents { get; set; }
+        public ICollection<Notification> notifications { get; set; }
     }
 }

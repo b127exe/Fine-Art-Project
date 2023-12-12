@@ -261,6 +261,49 @@ namespace FineArt.Migrations
                     b.ToTable("ExhibitionSubmissions");
                 });
 
+            modelBuilder.Entity("FineArt.Models.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"), 1L, 1);
+
+                    b.Property<int?>("AdminManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NotDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NotShowHide")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("AdminManagerId");
+
+                    b.HasIndex("PostingId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("FineArt.Models.Posting", b =>
                 {
                     b.Property<int>("PostingId")
@@ -766,6 +809,33 @@ namespace FineArt.Migrations
                     b.Navigation("Posting");
                 });
 
+            modelBuilder.Entity("FineArt.Models.Notification", b =>
+                {
+                    b.HasOne("FineArt.Models.AdminManager", "AdminManager")
+                        .WithMany("notifications")
+                        .HasForeignKey("AdminManagerId");
+
+                    b.HasOne("FineArt.Models.Posting", "Posting")
+                        .WithMany("notifications")
+                        .HasForeignKey("PostingId");
+
+                    b.HasOne("FineArt.Models.Student", "Student")
+                        .WithMany("notifications")
+                        .HasForeignKey("StudentId");
+
+                    b.HasOne("FineArt.Models.Teacher", "Teacher")
+                        .WithMany("notifications")
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("AdminManager");
+
+                    b.Navigation("Posting");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("FineArt.Models.Posting", b =>
                 {
                     b.HasOne("FineArt.Models.Student", "Student")
@@ -891,6 +961,8 @@ namespace FineArt.Migrations
             modelBuilder.Entity("FineArt.Models.AdminManager", b =>
                 {
                     b.Navigation("exhibitions");
+
+                    b.Navigation("notifications");
                 });
 
             modelBuilder.Entity("FineArt.Models.Award", b =>
@@ -921,6 +993,8 @@ namespace FineArt.Migrations
 
                     b.Navigation("exhibitionSubmissions");
 
+                    b.Navigation("notifications");
+
                     b.Navigation("postingSubmissions");
                 });
 
@@ -933,9 +1007,16 @@ namespace FineArt.Migrations
                 {
                     b.Navigation("awardedStudents");
 
+                    b.Navigation("notifications");
+
                     b.Navigation("postingSubmissions");
 
                     b.Navigation("postings");
+                });
+
+            modelBuilder.Entity("FineArt.Models.Teacher", b =>
+                {
+                    b.Navigation("notifications");
                 });
 #pragma warning restore 612, 618
         }

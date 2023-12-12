@@ -381,6 +381,26 @@ namespace FineArt.Controllers
                         await _context.SaveChangesAsync();
                     }
 
+                    //Notification send to the winner 
+                    var userID = HttpContext.Session.GetString("UserId");
+                    var findAdminManager = await _context.AdminManager.FirstOrDefaultAsync(u => u.UserId == userID);
+                    if (findAdminManager != null)
+                    {
+                        Notification notfication = new Notification()
+                        {
+                            NotDate = DateTime.Now,
+                            NotType = "awarded",
+                            NotShowHide = 0,
+                            PostingId = findSubmission.PostingId,
+                            StudentId = findStudent.StudentId,
+                            AdminManagerId = findAdminManager.AdminManagerId
+                        };
+                        await _context.Notifications.AddAsync(notfication);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    
+
                 }
                 return Json(new { status = "success", message = "The winner of the competition is successfully annnounce!" });
 
@@ -428,9 +448,62 @@ namespace FineArt.Controllers
             }
         }
         
-        public IActionResult ExhibitionsList()
+        public async Task<IActionResult> ExhibitionsList()
         {
-            return View();
+            var exhibition = await _context.Exhibitions.Include(a => a.AdminManager).ThenInclude(a => a.User).ToListAsync();
+            return View(exhibition);
+        }
+
+        public async Task<IActionResult> EditExhibition(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var exhibition = await _context.Exhibitions.FindAsync(id);
+            return View(exhibition);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditExhibition(Exhibition model)
+        {
+            if(model != null)
+            {
+                var findExhibition = await _context.Exhibitions.FindAsync(model.ExhibitionId);
+                findExhibition.ExhibitionTitle = model.ExhibitionTitle;
+                findExhibition.ExhibitionDate = model.ExhibitionDate;
+                findExhibition.Details = model.Details;
+                findExhibition.Conditions = model.Conditions;
+                findExhibition.Country = model.Country;
+
+                _context.Exhibitions.Update(findExhibition);
+                await _context.SaveChangesAsync();
+
+                return Json(new { status = "success", message = "The Exhibition is edited successfully!" });
+            }
+            else
+            {
+                return Json(new { status = "error", message = "an error occure while submitting the form..." });
+            }
+        }
+
+        public async Task<IActionResult> DeleteExhibition(int? id)
+        {
+            if(_context.Competitions == null)
+            {
+                return Json(new { status = "error", message = "an error occure because the exhibition set is empty..." });
+            }
+            var exhibition = await _context.Exhibitions.FindAsync(id);
+            if(exhibition != null)
+            {
+                _context.Remove(exhibition);
+                await _context.SaveChangesAsync();
+                return Json(new { status = "success", message = "The Exhibition is deleted successfully!" });
+            }
+            else
+            {
+                return Json(new { status = "error", message = "an error occure while deleting the exhibition..." });
+            }
         }
 
         // Dashboard home ajax call functions

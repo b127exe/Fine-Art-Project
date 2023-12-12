@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FineArt.Models
@@ -8,8 +9,10 @@ namespace FineArt.Models
 		[Key]
 		public int ExhibitionId { get; set; }
         [Required]
+        [DisplayName("Exhibition Title")]
         public string ExhibitionTitle { get; set; }
         [Required]
+        [DisplayName("Exhibition Date")]
         public string ExhibitionDate { get; set; }
         [Required]
         public string Details { get; set; }

@@ -27,5 +27,6 @@ namespace FineArt.Models
 		public IdentityUser User { get; set; }
 
         public ICollection<Exhibition> exhibitions { get; set; }
+        public ICollection<Notification> notifications { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace FineArt.Data
         public DbSet<Exhibition> Exhibitions { get; set; }
         public DbSet<ExhibitionSubmission> ExhibitionSubmissions { get; set; }
         public DbSet<CustomerExhibitionPost> CustomerExhibitionPosts { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -66,6 +67,30 @@ namespace FineArt.Data
                 .WithMany(s => s.postingSubmissions)
                 .HasForeignKey(ps => ps.StudentId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Posting)
+                .WithMany(p => p.notifications)
+                .HasForeignKey(n => n.PostingId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Student)
+                .WithMany(s => s.notifications)
+                .HasForeignKey(n => n.StudentId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.AdminManager)
+                .WithMany(a => a.notifications)
+                .HasForeignKey(n => n.AdminManagerId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Teacher)
+                .WithMany(t => t.notifications)
+                .HasForeignKey(n => n.TeacherId)
+                .IsRequired(false);
         }
     }
 }
