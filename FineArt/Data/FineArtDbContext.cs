@@ -91,6 +91,12 @@ namespace FineArt.Data
                 .WithMany(t => t.notifications)
                 .HasForeignKey(n => n.TeacherId)
                 .IsRequired(false);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Competition)
+                .WithMany(c => c.notifications)
+                .HasForeignKey(n => n.CompetitionId)
+                .IsRequired(false);
         }
     }
 }

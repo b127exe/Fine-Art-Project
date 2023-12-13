@@ -34,5 +34,10 @@ namespace FineArt.Models
         public int? TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
+        [ForeignKey("Competition")]
+        [DefaultValue(null)]
+        public int? CompetitionId { get; set; }
+        public Competition Competition { get; set; }
+
     }
 }

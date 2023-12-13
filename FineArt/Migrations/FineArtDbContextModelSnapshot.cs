@@ -272,10 +272,13 @@ namespace FineArt.Migrations
                     b.Property<int?>("AdminManagerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CompetitionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("NotDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NotShowHide")
+                    b.Property<int?>("NotShowHide")
                         .HasColumnType("int");
 
                     b.Property<string>("NotType")
@@ -294,6 +297,8 @@ namespace FineArt.Migrations
                     b.HasKey("NotificationId");
 
                     b.HasIndex("AdminManagerId");
+
+                    b.HasIndex("CompetitionId");
 
                     b.HasIndex("PostingId");
 
@@ -815,6 +820,10 @@ namespace FineArt.Migrations
                         .WithMany("notifications")
                         .HasForeignKey("AdminManagerId");
 
+                    b.HasOne("FineArt.Models.Competition", "Competition")
+                        .WithMany("notifications")
+                        .HasForeignKey("CompetitionId");
+
                     b.HasOne("FineArt.Models.Posting", "Posting")
                         .WithMany("notifications")
                         .HasForeignKey("PostingId");
@@ -828,6 +837,8 @@ namespace FineArt.Migrations
                         .HasForeignKey("TeacherId");
 
                     b.Navigation("AdminManager");
+
+                    b.Navigation("Competition");
 
                     b.Navigation("Posting");
 
@@ -973,6 +984,8 @@ namespace FineArt.Migrations
             modelBuilder.Entity("FineArt.Models.Competition", b =>
                 {
                     b.Navigation("awardedStudents");
+
+                    b.Navigation("notifications");
 
                     b.Navigation("postingSubmissions");
                 });

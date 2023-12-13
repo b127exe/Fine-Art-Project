@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FineArt.Controllers
 {
@@ -182,6 +184,36 @@ namespace FineArt.Controllers
 			var data = await _context.Postings.FindAsync(id);
 			return new JsonResult(data);
 		}
+
+		public async Task<IActionResult> GetUserNotifications()
+		{
+            var userID = HttpContext.Session.GetString("UserId");
+			var findStudent = await _context.Students.FirstOrDefaultAsync(s => s.UserId == userID);
+			if(userID != null && findStudent != null)
+			{
+
+				var options = new JsonSerializerOptions { 
+					ReferenceHandler = ReferenceHandler.Preserve,
+				};
+
+
+				var notification = await _context.Notifications.Include(c => c.Competition).Include(p => p.Posting).Where(s => s.StudentId == findStudent.StudentId && s.NotShowHide == 0).ToListAsync();
+				//var notification = await _context.Notifications.ToListAsync();
+
+				if(notification != null && notification.Any())
+				{
+					return Json(new { status = "success", message = "notification fetch successfully!", data = notification }, options);
+				}
+				else
+				{
+                    return Json(new { status = "warning", message = "notification set is empty!", });
+                }
+            }
+			else
+			{
+                return Json(new { status = "error", message = "An error occured while fetching the user notification..." });
+            }
+        }
 
         // TEACHER WEBSITE CONTROLS
         [Authorize(Roles = "Teacher")]

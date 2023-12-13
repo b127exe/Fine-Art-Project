@@ -336,7 +336,7 @@ namespace FineArt.Controllers
                     await _context.SaveChangesAsync();
 
                     //Update those who have 0 status to 2 means (failed)
-                    var submissionWithZeroStatus = await _context.PostingSubmissions.Where(s => s.SubmissionStatus == 0).ToListAsync();
+                    var submissionWithZeroStatus = await _context.PostingSubmissions.Where(s => s.SubmissionStatus == 0).Where(c => c.CompetitionId == findSubmission.CompetitionId).ToListAsync();
                     foreach (var submissions in submissionWithZeroStatus)
                     {
                         submissions.SubmissionStatus = 2;
@@ -393,7 +393,8 @@ namespace FineArt.Controllers
                             NotShowHide = 0,
                             PostingId = findSubmission.PostingId,
                             StudentId = findStudent.StudentId,
-                            AdminManagerId = findAdminManager.AdminManagerId
+                            AdminManagerId = findAdminManager.AdminManagerId,
+                            CompetitionId = findSubmission.CompetitionId
                         };
                         await _context.Notifications.AddAsync(notfication);
                         await _context.SaveChangesAsync();

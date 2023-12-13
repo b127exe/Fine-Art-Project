@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FineArt.Models
 {
@@ -29,6 +30,8 @@ namespace FineArt.Models
         public ICollection<Posting> postings { get; set; }
         public ICollection<PostingSubmission> postingSubmissions { get; set; }
         public ICollection<AwardedStudent> awardedStudents { get; set; }
+
+        [JsonIgnore]
         public ICollection<Notification> notifications { get; set; }
     }
 }

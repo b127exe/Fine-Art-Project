@@ -140,7 +140,10 @@
                 $(this).show();
             }
         });
-    })
+    });
+
+    //get all notification for user
+    getNotifications();
 
 });
 
@@ -495,3 +498,60 @@ function submitRemarksForm(form) {
         }
     });
 }
+
+function getNotifications() {
+    $.ajax({
+        url: "/Web/GetUserNotifications",
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (response, status, xhr) {
+
+            let notifyBox = '';
+            if (response.status == 'success') {
+            var notifications = response.data.$values;
+                $.each(notifications, function (index, item) {
+                    if (item.NotType == "awarded") {
+                        let formattedDate = formatNotificationDate(item.NotDate);
+                        let url = `/Web/NotificationById/${item.NotificationId}`;
+                        notifyBox += `
+                             <li class="list-group-item d-flex justify-content-center align-items-center flex-column custom-lists" style="border-radius: 0;border-right: none;border-left: none;cursor: pointer;" data-id="${item.NotificationId}">
+                               <a href="${url}" style="text-decoration:none;color:#333;"><div class="w-100 d-flex justify-content-between align-items-center my-2">
+                                  <div class="fw-bold" style="font-size: 18px;">Winner!</div>   
+                                  <span class="badge bg-warning rounded-pill">${formattedDate}</span>
+                                </div>
+                                <p style="margin:0;font-size:15px;">You have win the ${item.Competition.CompetitionTitle} with your art design ${item.Posting.Title}...</p>
+                               </a> 
+                             </li>
+                    `;
+                    }
+                });
+            }
+            else {
+                notifyBox += `
+                           <li class="list-group-item d-flex justify-content-center align-items-start" style="border-radius: 0;border-right: none;border-left: none;cursor: pointer">
+                              <p style="margin:0;font-size:16px;">No Notifications...</p>
+                           </li>
+                    `;
+            }
+
+            $(".notifications").html(notifyBox);
+
+        },
+        error: function () {
+            alert("Data can't get...");
+        }
+    });
+}
+
+function formatNotificationDate(dateString) {
+    // Parse the date string
+    var date = new Date(dateString);
+
+    // Format the date
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = date.toLocaleDateString('en-US', options);
+
+    return formattedDate;
+}
+
